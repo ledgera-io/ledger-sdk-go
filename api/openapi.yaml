@@ -34,14 +34,23 @@ paths:
           description: Conflict
       tags:
       - transaction
-  /account/:id/statement:
+  /account/{id}/statement:
     get:
+      parameters:
+      - example: 684936a4-f1f5-48ed-9378-ca9e31cf76a7
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_account__id_statement_get_200_response'
+                $ref: '#/components/schemas/_account__id__statement_get_200_response'
           description: Ok
       tags:
       - account
@@ -305,7 +314,7 @@ components:
         amount:
           type: string
       type: object
-    _account__id_statement_get_200_response:
+    _account__id__statement_get_200_response:
       example:
         metadata:
           count: 0.8008281904610115

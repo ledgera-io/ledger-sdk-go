@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 
@@ -134,6 +135,7 @@ func (a *AccountApiService) AccountGetExecute(r ApiAccountGetRequest) (*Account,
 type ApiAccountIdStatementGetRequest struct {
 	ctx context.Context
 	ApiService *AccountApiService
+	id string
 }
 
 func (r ApiAccountIdStatementGetRequest) Execute() (*AccountIdStatementGet200Response, *http.Response, error) {
@@ -144,12 +146,14 @@ func (r ApiAccountIdStatementGetRequest) Execute() (*AccountIdStatementGet200Res
 AccountIdStatementGet Method for AccountIdStatementGet
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id
  @return ApiAccountIdStatementGetRequest
 */
-func (a *AccountApiService) AccountIdStatementGet(ctx context.Context) ApiAccountIdStatementGetRequest {
+func (a *AccountApiService) AccountIdStatementGet(ctx context.Context, id string) ApiAccountIdStatementGetRequest {
 	return ApiAccountIdStatementGetRequest{
 		ApiService: a,
 		ctx: ctx,
+		id: id,
 	}
 }
 
@@ -168,7 +172,8 @@ func (a *AccountApiService) AccountIdStatementGetExecute(r ApiAccountIdStatement
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/account/:id/statement"
+	localVarPath := localBasePath + "/account/{id}/statement"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

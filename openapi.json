@@ -1,0 +1,402 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "API ledgera",
+    "version": "1.0"
+  },
+  "servers": [{ "url": "https://api.ledgera.io/v1" }],
+  "components": {
+    "schemas": {
+      "conflict": {
+        "type": "object",
+        "properties": {
+          "transactionType": {
+            "type": "string"
+          },
+          "transactionProcess": {
+            "type": "string"
+          },
+          "expectedAmount": {
+            "type": "string"
+          },
+          "accountId": {
+            "type": "string"
+          }
+        }
+      },
+      "unprocessableEntity": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "$ref": "#/components/schemas/validationError"
+            }
+          }
+        }
+      },
+      "validationError": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "constraint": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          }
+        }
+      },
+      "notFound": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "resource": {
+            "type": "string"
+          }
+        }
+      },
+      "accountType": {
+        "type": "string",
+        "enum": ["liability", "asset"]
+      },
+      "balanceType": {
+        "type": "string",
+        "enum": ["available", "blocked", "pending"]
+      },
+      "statement": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "seqNum": {
+            "type": "integer"
+          },
+          "transactionId": {
+            "type": "string"
+          },
+          "entryId": {
+            "type": "string"
+          },
+          "accountLabel": {
+            "type": "string"
+          },
+          "accountType": {
+            "$ref": "#/components/schemas/accountType"
+          },
+          "accountId": {
+            "type": "string"
+          },
+          "entryLabel": {
+            "type": "string"
+          },
+          "entryOrder": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "balanceType": {
+            "$ref": "#/components/schemas/balanceType"
+          },
+          "currency": {
+            "type": "string",
+            "maxLength": 3
+          },
+          "amount": {
+            "type": "string"
+          },
+          "conciliationId": {
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "string"
+          },
+          "processType": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {}
+          },
+          "balanceAfter": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "settledAt": {
+            "type": "string",
+            "format": "nullable"
+          }
+        }
+      },
+      "metadata": {
+        "type": "object",
+        "properties": {
+          "count": {
+            "type": "number"
+          },
+          "limit": {
+            "type": "number"
+          },
+          "skip": {
+            "type": "number"
+          },
+          "order": {
+            "type": "string",
+            "example": "createdAt DESC"
+          }
+        }
+      },
+      "balance": {
+        "type": "object",
+        "properties": {
+          "accountId": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "currency": {
+            "type": "string"
+          },
+          "seqNum": {
+            "type": "integer"
+          },
+          "amount": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "account": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "balances": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/balance"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "transactionEntry": {
+        "type": "object",
+        "properties": {
+          "transactionType": {
+            "type": "string"
+          },
+          "entryType": {
+            "type": "string"
+          }
+        },
+        "required": ["transactionType", "entryType"]
+      },
+      "billingPlan": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "transactionType": {
+            "type": "string"
+          },
+          "entryType": {
+            "type": "string"
+          },
+          "amountType": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "paths": {
+    "/transaction": {
+      "get": {
+        "tags": ["transaction"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["transaction"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/conflict"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account/{id}/statement": {
+      "get": {
+        "tags": ["account"],
+        "parameters": [
+          { 
+            "name": "id",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "example": "684936a4-f1f5-48ed-9378-ca9e31cf76a7",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "metadata": {
+                      "$ref": "#/components/schemas/metadata"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/statement"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/account": {
+      "get": {
+        "tags": ["account"],
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/account"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/notFound"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": ["account"],
+        "description": "",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json:": {
+              "schema": {
+                "type": "object",
+                "required": ["type", "label"],
+                "properties": {
+                  "type": {
+                    "$ref": "#/components/schemas/accountType"
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/account"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

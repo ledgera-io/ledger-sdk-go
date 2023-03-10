@@ -5,7 +5,7 @@ All URIs are relative to *https://api.ledgera.io/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AccountGet**](AccountApi.md#AccountGet) | **Get** /account | 
-[**AccountIdStatementGet**](AccountApi.md#AccountIdStatementGet) | **Get** /account/:id/statement | 
+[**AccountIdStatementGet**](AccountApi.md#AccountIdStatementGet) | **Get** /account/{id}/statement | 
 [**AccountPost**](AccountApi.md#AccountPost) | **Post** /account | 
 
 
@@ -73,7 +73,7 @@ No authorization required
 
 ## AccountIdStatementGet
 
-> AccountIdStatementGet200Response AccountIdStatementGet(ctx).Execute()
+> AccountIdStatementGet200Response AccountIdStatementGet(ctx, id).Execute()
 
 
 
@@ -90,10 +90,11 @@ import (
 )
 
 func main() {
+    id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | 
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountApi.AccountIdStatementGet(context.Background()).Execute()
+    resp, r, err := apiClient.AccountApi.AccountIdStatementGet(context.Background(), id).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountApi.AccountIdStatementGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -105,11 +106,19 @@ func main() {
 
 ### Path Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
 
 ### Other Parameters
 
 Other parameters are passed through a pointer to a apiAccountIdStatementGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
 
 
 ### Return type
