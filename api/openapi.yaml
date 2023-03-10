@@ -1,0 +1,371 @@
+openapi: 3.0.2
+info:
+  title: API ledgera
+  version: "1.0"
+servers:
+- url: https://api.ledgera.io/v1
+paths:
+  /transaction:
+    get:
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+          description: Not found
+      tags:
+      - transaction
+    post:
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          description: OK
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/conflict'
+          description: Conflict
+      tags:
+      - transaction
+  /account/:id/statement:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_account__id_statement_get_200_response'
+          description: Ok
+      tags:
+      - account
+  /account:
+    get:
+      description: ""
+      parameters: []
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notFound'
+          description: Not found
+      tags:
+      - account
+    post:
+      description: ""
+      parameters: []
+      requestBody:
+        content:
+          'application/json:':
+            schema:
+              $ref: '#/components/schemas/_account_post_request'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account'
+          description: Created
+      tags:
+      - account
+components:
+  schemas:
+    conflict:
+      properties:
+        transactionType:
+          type: string
+        transactionProcess:
+          type: string
+        expectedAmount:
+          type: string
+        accountId:
+          type: string
+      type: object
+    unprocessableEntity:
+      properties:
+        message:
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/validationError'
+          type: array
+      type: object
+    validationError:
+      properties:
+        field:
+          type: string
+        value:
+          type: string
+        constraint:
+          type: string
+        description:
+          type: string
+        code:
+          type: string
+      type: object
+    notFound:
+      properties:
+        message:
+          type: string
+        resource:
+          type: string
+      type: object
+    accountType:
+      enum:
+      - liability
+      - asset
+      type: string
+    balanceType:
+      enum:
+      - available
+      - blocked
+      - pending
+      type: string
+    statement:
+      example:
+        amount: amount
+        metadata: "{}"
+        entryLabel: entryLabel
+        entryOrder: 5
+        seqNum: 5
+        accountType: null
+        transactionId: transactionId
+        entryId: entryId
+        transactionType: transactionType
+        accountId: accountId
+        createdAt: createdAt
+        balanceType: null
+        conciliationId: conciliationId
+        settledAt: settledAt
+        currency: currency
+        balanceAfter: balanceAfter
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        processType: processType
+        accountLabel: accountLabel
+      properties:
+        id:
+          format: uuid
+          type: string
+        seqNum:
+          type: integer
+        transactionId:
+          type: string
+        entryId:
+          type: string
+        accountLabel:
+          type: string
+        accountType:
+          $ref: '#/components/schemas/accountType'
+        accountId:
+          type: string
+        entryLabel:
+          type: string
+        entryOrder:
+          format: int32
+          type: integer
+        balanceType:
+          $ref: '#/components/schemas/balanceType'
+        currency:
+          maxLength: 3
+          type: string
+        amount:
+          type: string
+        conciliationId:
+          type: string
+        transactionType:
+          type: string
+        processType:
+          type: string
+        metadata:
+          properties: {}
+          type: object
+        balanceAfter:
+          type: string
+        createdAt:
+          type: string
+        settledAt:
+          format: nullable
+          type: string
+      type: object
+    metadata:
+      example:
+        count: 0.8008281904610115
+        limit: 6.027456183070403
+        skip: 1.4658129805029452
+        order: createdAt DESC
+      properties:
+        count:
+          type: number
+        limit:
+          type: number
+        skip:
+          type: number
+        order:
+          example: createdAt DESC
+          type: string
+      type: object
+    balance:
+      example:
+        accountId: accountId
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        amount: amount
+        seqNum: 0
+        currency: currency
+        type: type
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        accountId:
+          type: string
+        type:
+          type: string
+        currency:
+          type: string
+        seqNum:
+          type: integer
+        amount:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      type: object
+    account:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        balances:
+        - accountId: accountId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          amount: amount
+          seqNum: 0
+          currency: currency
+          type: type
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        - accountId: accountId
+          createdAt: 2000-01-23T04:56:07.000+00:00
+          amount: amount
+          seqNum: 0
+          currency: currency
+          type: type
+          updatedAt: 2000-01-23T04:56:07.000+00:00
+        id: id
+        label: label
+        type: type
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        label:
+          type: string
+        balances:
+          items:
+            $ref: '#/components/schemas/balance'
+          type: array
+        createdAt:
+          format: date-time
+          type: string
+      type: object
+    transactionEntry:
+      properties:
+        transactionType:
+          type: string
+        entryType:
+          type: string
+      required:
+      - entryType
+      - transactionType
+      type: object
+    billingPlan:
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        transactionType:
+          type: string
+        entryType:
+          type: string
+        amountType:
+          type: string
+        amount:
+          type: string
+      type: object
+    _account__id_statement_get_200_response:
+      example:
+        metadata:
+          count: 0.8008281904610115
+          limit: 6.027456183070403
+          skip: 1.4658129805029452
+          order: createdAt DESC
+        data:
+        - amount: amount
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 5
+          seqNum: 5
+          accountType: null
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: null
+          conciliationId: conciliationId
+          settledAt: settledAt
+          currency: currency
+          balanceAfter: balanceAfter
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          processType: processType
+          accountLabel: accountLabel
+        - amount: amount
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 5
+          seqNum: 5
+          accountType: null
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: null
+          conciliationId: conciliationId
+          settledAt: settledAt
+          currency: currency
+          balanceAfter: balanceAfter
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          processType: processType
+          accountLabel: accountLabel
+      properties:
+        metadata:
+          $ref: '#/components/schemas/metadata'
+        data:
+          items:
+            $ref: '#/components/schemas/statement'
+          type: array
+      type: object
+    _account_post_request:
+      properties:
+        type:
+          $ref: '#/components/schemas/accountType'
+        label:
+          type: string
+      required:
+      - label
+      - type
+      type: object
