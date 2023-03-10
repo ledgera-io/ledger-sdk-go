@@ -1,4 +1,4 @@
-module github.com/ledgera.io/ledger-sdk-go
+module github.com/ledgera-io/ledger-sdk-go
 
 go 1.18
 
