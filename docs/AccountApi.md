@@ -157,8 +157,8 @@ import (
 
 func main() {
     id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | account ID
-    limit := int32(1) // int32 | 
-    cursor := "MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=" // string | 
+    limit := int32(1) // int32 |  (optional)
+    cursor := "MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=" // string |  (optional)
     dateFrom := "2023-03-13T21:33:07.202Z" // string |  (optional)
     dateTo := "2023-03-13T21:33:07.202Z" // string |  (optional)
     entryType := "DEBIT" // string |  (optional)

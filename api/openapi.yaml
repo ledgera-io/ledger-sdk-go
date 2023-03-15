@@ -50,7 +50,7 @@ paths:
         explode: true
         in: query
         name: limit
-        required: true
+        required: false
         schema:
           type: integer
         style: form
@@ -58,7 +58,7 @@ paths:
         explode: true
         in: query
         name: cursor
-        required: true
+        required: false
         schema:
           type: string
         style: form

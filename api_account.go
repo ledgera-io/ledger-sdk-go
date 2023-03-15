@@ -315,15 +315,13 @@ func (a *AccountApiService) V1AccountIdJournalGetExecute(r ApiV1AccountIdJournal
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.limit == nil {
-		return localVarReturnValue, nil, reportError("limit is required and must be specified")
-	}
-	if r.cursor == nil {
-		return localVarReturnValue, nil, reportError("cursor is required and must be specified")
-	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	}
+	if r.cursor != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+	}
 	if r.dateFrom != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "date_from", r.dateFrom, "")
 	}
