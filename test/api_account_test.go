@@ -35,11 +35,13 @@ func Test_openapi_AccountApiService(t *testing.T) {
 
 	})
 
-	t.Run("Test AccountApiService AccountIdStatementGet", func(t *testing.T) {
+	t.Run("Test AccountApiService AccountIdJournalGet", func(t *testing.T) {
 
 		t.Skip("skip test") // remove to run test
 
-		resp, httpRes, err := apiClient.AccountApi.AccountIdStatementGet(context.Background()).Execute()
+		var id string
+
+		resp, httpRes, err := apiClient.AccountApi.AccountIdJournalGet(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

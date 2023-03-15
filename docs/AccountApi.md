@@ -5,7 +5,7 @@ All URIs are relative to *https://api.ledgera.io/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AccountGet**](AccountApi.md#AccountGet) | **Get** /account | 
-[**AccountIdStatementGet**](AccountApi.md#AccountIdStatementGet) | **Get** /account/{id}/statement | 
+[**AccountIdJournalGet**](AccountApi.md#AccountIdJournalGet) | **Get** /account/{id}/journal | 
 [**AccountPost**](AccountApi.md#AccountPost) | **Post** /account | 
 
 
@@ -71,9 +71,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## AccountIdStatementGet
+## AccountIdJournalGet
 
-> AccountIdStatementGet200Response AccountIdStatementGet(ctx, id).Execute()
+> AccountIdJournalGet200Response AccountIdJournalGet(ctx, id).Limit(limit).Cursor(cursor).Order(order).EntryType(entryType).DateFrom(dateFrom).DateTo(dateTo).Execute()
 
 
 
@@ -90,17 +90,23 @@ import (
 )
 
 func main() {
-    id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | 
+    id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | account ID
+    limit := int32(1) // int32 | 
+    cursor := "MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=" // string | 
+    order := "ASC" // string | 
+    entryType := "DEBIT" // string | 
+    dateFrom := "2023-03-13T21:33:07.202Z" // string |  (optional)
+    dateTo := "2023-03-13T21:33:07.202Z" // string |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountApi.AccountIdStatementGet(context.Background(), id).Execute()
+    resp, r, err := apiClient.AccountApi.AccountIdJournalGet(context.Background(), id).Limit(limit).Cursor(cursor).Order(order).EntryType(entryType).DateFrom(dateFrom).DateTo(dateTo).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountApi.AccountIdStatementGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountApi.AccountIdJournalGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AccountIdStatementGet`: AccountIdStatementGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `AccountApi.AccountIdStatementGet`: %v\n", resp)
+    // response from `AccountIdJournalGet`: AccountIdJournalGet200Response
+    fmt.Fprintf(os.Stdout, "Response from `AccountApi.AccountIdJournalGet`: %v\n", resp)
 }
 ```
 
@@ -110,20 +116,26 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | account ID | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAccountIdStatementGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiAccountIdJournalGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **limit** | **int32** |  | 
+ **cursor** | **string** |  | 
+ **order** | **string** |  | 
+ **entryType** | **string** |  | 
+ **dateFrom** | **string** |  | 
+ **dateTo** | **string** |  | 
 
 ### Return type
 
-[**AccountIdStatementGet200Response**](AccountIdStatementGet200Response.md)
+[**AccountIdJournalGet200Response**](AccountIdJournalGet200Response.md)
 
 ### Authorization
 

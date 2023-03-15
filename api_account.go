@@ -132,25 +132,61 @@ func (a *AccountApiService) AccountGetExecute(r ApiAccountGetRequest) (*Account,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountIdStatementGetRequest struct {
+type ApiAccountIdJournalGetRequest struct {
 	ctx context.Context
 	ApiService *AccountApiService
 	id string
+	limit *int32
+	cursor *string
+	order *string
+	entryType *string
+	dateFrom *string
+	dateTo *string
 }
 
-func (r ApiAccountIdStatementGetRequest) Execute() (*AccountIdStatementGet200Response, *http.Response, error) {
-	return r.ApiService.AccountIdStatementGetExecute(r)
+func (r ApiAccountIdJournalGetRequest) Limit(limit int32) ApiAccountIdJournalGetRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) Cursor(cursor string) ApiAccountIdJournalGetRequest {
+	r.cursor = &cursor
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) Order(order string) ApiAccountIdJournalGetRequest {
+	r.order = &order
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) EntryType(entryType string) ApiAccountIdJournalGetRequest {
+	r.entryType = &entryType
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) DateFrom(dateFrom string) ApiAccountIdJournalGetRequest {
+	r.dateFrom = &dateFrom
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) DateTo(dateTo string) ApiAccountIdJournalGetRequest {
+	r.dateTo = &dateTo
+	return r
+}
+
+func (r ApiAccountIdJournalGetRequest) Execute() (*AccountIdJournalGet200Response, *http.Response, error) {
+	return r.ApiService.AccountIdJournalGetExecute(r)
 }
 
 /*
-AccountIdStatementGet Method for AccountIdStatementGet
+AccountIdJournalGet Method for AccountIdJournalGet
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiAccountIdStatementGetRequest
+ @param id account ID
+ @return ApiAccountIdJournalGetRequest
 */
-func (a *AccountApiService) AccountIdStatementGet(ctx context.Context, id string) ApiAccountIdStatementGetRequest {
-	return ApiAccountIdStatementGetRequest{
+func (a *AccountApiService) AccountIdJournalGet(ctx context.Context, id string) ApiAccountIdJournalGetRequest {
+	return ApiAccountIdJournalGetRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -158,27 +194,49 @@ func (a *AccountApiService) AccountIdStatementGet(ctx context.Context, id string
 }
 
 // Execute executes the request
-//  @return AccountIdStatementGet200Response
-func (a *AccountApiService) AccountIdStatementGetExecute(r ApiAccountIdStatementGetRequest) (*AccountIdStatementGet200Response, *http.Response, error) {
+//  @return AccountIdJournalGet200Response
+func (a *AccountApiService) AccountIdJournalGetExecute(r ApiAccountIdJournalGetRequest) (*AccountIdJournalGet200Response, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *AccountIdStatementGet200Response
+		localVarReturnValue  *AccountIdJournalGet200Response
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountApiService.AccountIdStatementGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountApiService.AccountIdJournalGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/account/{id}/statement"
+	localVarPath := localBasePath + "/account/{id}/journal"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
+	if r.limit == nil {
+		return localVarReturnValue, nil, reportError("limit is required and must be specified")
+	}
+	if r.cursor == nil {
+		return localVarReturnValue, nil, reportError("cursor is required and must be specified")
+	}
+	if r.order == nil {
+		return localVarReturnValue, nil, reportError("order is required and must be specified")
+	}
+	if r.entryType == nil {
+		return localVarReturnValue, nil, reportError("entryType is required and must be specified")
+	}
 
+	parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "order", r.order, "")
+	if r.dateFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date_from", r.dateFrom, "")
+	}
+	if r.dateTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date_to", r.dateTo, "")
+	}
+	parameterAddToHeaderOrQuery(localVarQueryParams, "entry_type", r.entryType, "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

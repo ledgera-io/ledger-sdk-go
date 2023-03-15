@@ -21,8 +21,8 @@ var _ MappedNullable = &Metadata{}
 type Metadata struct {
 	Count *float32 `json:"count,omitempty"`
 	Limit *float32 `json:"limit,omitempty"`
-	Skip *float32 `json:"skip,omitempty"`
-	Order *string `json:"order,omitempty"`
+	CurrentCursor *string `json:"currentCursor,omitempty"`
+	NextCursor *string `json:"nextCursor,omitempty"`
 }
 
 // NewMetadata instantiates a new Metadata object
@@ -106,68 +106,68 @@ func (o *Metadata) SetLimit(v float32) {
 	o.Limit = &v
 }
 
-// GetSkip returns the Skip field value if set, zero value otherwise.
-func (o *Metadata) GetSkip() float32 {
-	if o == nil || IsNil(o.Skip) {
-		var ret float32
-		return ret
-	}
-	return *o.Skip
-}
-
-// GetSkipOk returns a tuple with the Skip field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Metadata) GetSkipOk() (*float32, bool) {
-	if o == nil || IsNil(o.Skip) {
-		return nil, false
-	}
-	return o.Skip, true
-}
-
-// HasSkip returns a boolean if a field has been set.
-func (o *Metadata) HasSkip() bool {
-	if o != nil && !IsNil(o.Skip) {
-		return true
-	}
-
-	return false
-}
-
-// SetSkip gets a reference to the given float32 and assigns it to the Skip field.
-func (o *Metadata) SetSkip(v float32) {
-	o.Skip = &v
-}
-
-// GetOrder returns the Order field value if set, zero value otherwise.
-func (o *Metadata) GetOrder() string {
-	if o == nil || IsNil(o.Order) {
+// GetCurrentCursor returns the CurrentCursor field value if set, zero value otherwise.
+func (o *Metadata) GetCurrentCursor() string {
+	if o == nil || IsNil(o.CurrentCursor) {
 		var ret string
 		return ret
 	}
-	return *o.Order
+	return *o.CurrentCursor
 }
 
-// GetOrderOk returns a tuple with the Order field value if set, nil otherwise
+// GetCurrentCursorOk returns a tuple with the CurrentCursor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetOrderOk() (*string, bool) {
-	if o == nil || IsNil(o.Order) {
+func (o *Metadata) GetCurrentCursorOk() (*string, bool) {
+	if o == nil || IsNil(o.CurrentCursor) {
 		return nil, false
 	}
-	return o.Order, true
+	return o.CurrentCursor, true
 }
 
-// HasOrder returns a boolean if a field has been set.
-func (o *Metadata) HasOrder() bool {
-	if o != nil && !IsNil(o.Order) {
+// HasCurrentCursor returns a boolean if a field has been set.
+func (o *Metadata) HasCurrentCursor() bool {
+	if o != nil && !IsNil(o.CurrentCursor) {
 		return true
 	}
 
 	return false
 }
 
-// SetOrder gets a reference to the given string and assigns it to the Order field.
-func (o *Metadata) SetOrder(v string) {
-	o.Order = &v
+// SetCurrentCursor gets a reference to the given string and assigns it to the CurrentCursor field.
+func (o *Metadata) SetCurrentCursor(v string) {
+	o.CurrentCursor = &v
+}
+
+// GetNextCursor returns the NextCursor field value if set, zero value otherwise.
+func (o *Metadata) GetNextCursor() string {
+	if o == nil || IsNil(o.NextCursor) {
+		var ret string
+		return ret
+	}
+	return *o.NextCursor
+}
+
+// GetNextCursorOk returns a tuple with the NextCursor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Metadata) GetNextCursorOk() (*string, bool) {
+	if o == nil || IsNil(o.NextCursor) {
+		return nil, false
+	}
+	return o.NextCursor, true
+}
+
+// HasNextCursor returns a boolean if a field has been set.
+func (o *Metadata) HasNextCursor() bool {
+	if o != nil && !IsNil(o.NextCursor) {
+		return true
+	}
+
+	return false
+}
+
+// SetNextCursor gets a reference to the given string and assigns it to the NextCursor field.
+func (o *Metadata) SetNextCursor(v string) {
+	o.NextCursor = &v
 }
 
 func (o Metadata) MarshalJSON() ([]byte, error) {
@@ -186,11 +186,11 @@ func (o Metadata) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.Limit) {
 		toSerialize["limit"] = o.Limit
 	}
-	if !IsNil(o.Skip) {
-		toSerialize["skip"] = o.Skip
+	if !IsNil(o.CurrentCursor) {
+		toSerialize["currentCursor"] = o.CurrentCursor
 	}
-	if !IsNil(o.Order) {
-		toSerialize["order"] = o.Order
+	if !IsNil(o.NextCursor) {
+		toSerialize["nextCursor"] = o.NextCursor
 	}
 	return toSerialize, nil
 }

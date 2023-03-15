@@ -6,8 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Count** | Pointer to **float32** |  | [optional] 
 **Limit** | Pointer to **float32** |  | [optional] 
-**Skip** | Pointer to **float32** |  | [optional] 
-**Order** | Pointer to **string** |  | [optional] 
+**CurrentCursor** | Pointer to **string** |  | [optional] 
+**NextCursor** | Pointer to **string** |  | [optional] 
 
 ## Methods
 
@@ -78,55 +78,55 @@ SetLimit sets Limit field to given value.
 
 HasLimit returns a boolean if a field has been set.
 
-### GetSkip
+### GetCurrentCursor
 
-`func (o *Metadata) GetSkip() float32`
+`func (o *Metadata) GetCurrentCursor() string`
 
-GetSkip returns the Skip field if non-nil, zero value otherwise.
+GetCurrentCursor returns the CurrentCursor field if non-nil, zero value otherwise.
 
-### GetSkipOk
+### GetCurrentCursorOk
 
-`func (o *Metadata) GetSkipOk() (*float32, bool)`
+`func (o *Metadata) GetCurrentCursorOk() (*string, bool)`
 
-GetSkipOk returns a tuple with the Skip field if it's non-nil, zero value otherwise
+GetCurrentCursorOk returns a tuple with the CurrentCursor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetSkip
+### SetCurrentCursor
 
-`func (o *Metadata) SetSkip(v float32)`
+`func (o *Metadata) SetCurrentCursor(v string)`
 
-SetSkip sets Skip field to given value.
+SetCurrentCursor sets CurrentCursor field to given value.
 
-### HasSkip
+### HasCurrentCursor
 
-`func (o *Metadata) HasSkip() bool`
+`func (o *Metadata) HasCurrentCursor() bool`
 
-HasSkip returns a boolean if a field has been set.
+HasCurrentCursor returns a boolean if a field has been set.
 
-### GetOrder
+### GetNextCursor
 
-`func (o *Metadata) GetOrder() string`
+`func (o *Metadata) GetNextCursor() string`
 
-GetOrder returns the Order field if non-nil, zero value otherwise.
+GetNextCursor returns the NextCursor field if non-nil, zero value otherwise.
 
-### GetOrderOk
+### GetNextCursorOk
 
-`func (o *Metadata) GetOrderOk() (*string, bool)`
+`func (o *Metadata) GetNextCursorOk() (*string, bool)`
 
-GetOrderOk returns a tuple with the Order field if it's non-nil, zero value otherwise
+GetNextCursorOk returns a tuple with the NextCursor field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetOrder
+### SetNextCursor
 
-`func (o *Metadata) SetOrder(v string)`
+`func (o *Metadata) SetNextCursor(v string)`
 
-SetOrder sets Order field to given value.
+SetNextCursor sets NextCursor field to given value.
 
-### HasOrder
+### HasNextCursor
 
-`func (o *Metadata) HasOrder() bool`
+`func (o *Metadata) HasNextCursor() bool`
 
-HasOrder returns a boolean if a field has been set.
+HasNextCursor returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

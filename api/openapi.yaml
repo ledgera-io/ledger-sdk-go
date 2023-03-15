@@ -34,10 +34,11 @@ paths:
           description: Conflict
       tags:
       - transaction
-  /account/{id}/statement:
+  /account/{id}/journal:
     get:
       parameters:
-      - example: 684936a4-f1f5-48ed-9378-ca9e31cf76a7
+      - description: account ID
+        example: 684936a4-f1f5-48ed-9378-ca9e31cf76a7
         explode: false
         in: path
         name: id
@@ -45,12 +46,66 @@ paths:
         schema:
           type: string
         style: simple
+      - example: 1
+        explode: true
+        in: query
+        name: limit
+        required: true
+        schema:
+          type: integer
+        style: form
+      - example: MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=
+        explode: true
+        in: query
+        name: cursor
+        required: true
+        schema:
+          type: string
+        style: form
+      - example: ASC
+        explode: true
+        in: query
+        name: order
+        required: true
+        schema:
+          enum:
+          - ASC
+          - DESC
+          type: string
+        style: form
+      - example: 2023-03-13T21:33:07.202Z
+        explode: true
+        in: query
+        name: date_from
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: 2023-03-13T21:33:07.202Z
+        explode: true
+        in: query
+        name: date_to
+        required: false
+        schema:
+          type: string
+        style: form
+      - example: DEBIT
+        explode: true
+        in: query
+        name: entry_type
+        required: true
+        schema:
+          enum:
+          - DEBIT
+          - CREDIT
+          type: string
+        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_account__id__statement_get_200_response'
+                $ref: '#/components/schemas/_account__id__journal_get_200_response'
           description: Ok
       tags:
       - account
@@ -149,7 +204,7 @@ components:
         metadata: "{}"
         entryLabel: entryLabel
         entryOrder: 5
-        seqNum: 5
+        seqNum: 1
         accountType: null
         transactionId: transactionId
         entryId: entryId
@@ -211,19 +266,18 @@ components:
       type: object
     metadata:
       example:
+        nextCursor: nextCursor
         count: 0.8008281904610115
         limit: 6.027456183070403
-        skip: 1.4658129805029452
-        order: createdAt DESC
+        currentCursor: currentCursor
       properties:
         count:
           type: number
         limit:
           type: number
-        skip:
-          type: number
-        order:
-          example: createdAt DESC
+        currentCursor:
+          type: string
+        nextCursor:
           type: string
       type: object
     balance:
@@ -314,19 +368,19 @@ components:
         amount:
           type: string
       type: object
-    _account__id__statement_get_200_response:
+    _account__id__journal_get_200_response:
       example:
         metadata:
+          nextCursor: nextCursor
           count: 0.8008281904610115
           limit: 6.027456183070403
-          skip: 1.4658129805029452
-          order: createdAt DESC
+          currentCursor: currentCursor
         data:
         - amount: amount
           metadata: "{}"
           entryLabel: entryLabel
           entryOrder: 5
-          seqNum: 5
+          seqNum: 1
           accountType: null
           transactionId: transactionId
           entryId: entryId
@@ -345,7 +399,7 @@ components:
           metadata: "{}"
           entryLabel: entryLabel
           entryOrder: 5
-          seqNum: 5
+          seqNum: 1
           accountType: null
           transactionId: transactionId
           entryId: entryId

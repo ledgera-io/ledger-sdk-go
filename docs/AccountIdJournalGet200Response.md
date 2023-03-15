@@ -1,4 +1,4 @@
-# AccountIdStatementGet200Response
+# AccountIdJournalGet200Response
 
 ## Properties
 
@@ -9,70 +9,70 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewAccountIdStatementGet200Response
+### NewAccountIdJournalGet200Response
 
-`func NewAccountIdStatementGet200Response() *AccountIdStatementGet200Response`
+`func NewAccountIdJournalGet200Response() *AccountIdJournalGet200Response`
 
-NewAccountIdStatementGet200Response instantiates a new AccountIdStatementGet200Response object
+NewAccountIdJournalGet200Response instantiates a new AccountIdJournalGet200Response object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAccountIdStatementGet200ResponseWithDefaults
+### NewAccountIdJournalGet200ResponseWithDefaults
 
-`func NewAccountIdStatementGet200ResponseWithDefaults() *AccountIdStatementGet200Response`
+`func NewAccountIdJournalGet200ResponseWithDefaults() *AccountIdJournalGet200Response`
 
-NewAccountIdStatementGet200ResponseWithDefaults instantiates a new AccountIdStatementGet200Response object
+NewAccountIdJournalGet200ResponseWithDefaults instantiates a new AccountIdJournalGet200Response object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetMetadata
 
-`func (o *AccountIdStatementGet200Response) GetMetadata() Metadata`
+`func (o *AccountIdJournalGet200Response) GetMetadata() Metadata`
 
 GetMetadata returns the Metadata field if non-nil, zero value otherwise.
 
 ### GetMetadataOk
 
-`func (o *AccountIdStatementGet200Response) GetMetadataOk() (*Metadata, bool)`
+`func (o *AccountIdJournalGet200Response) GetMetadataOk() (*Metadata, bool)`
 
 GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMetadata
 
-`func (o *AccountIdStatementGet200Response) SetMetadata(v Metadata)`
+`func (o *AccountIdJournalGet200Response) SetMetadata(v Metadata)`
 
 SetMetadata sets Metadata field to given value.
 
 ### HasMetadata
 
-`func (o *AccountIdStatementGet200Response) HasMetadata() bool`
+`func (o *AccountIdJournalGet200Response) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
 
 ### GetData
 
-`func (o *AccountIdStatementGet200Response) GetData() []Statement`
+`func (o *AccountIdJournalGet200Response) GetData() []Statement`
 
 GetData returns the Data field if non-nil, zero value otherwise.
 
 ### GetDataOk
 
-`func (o *AccountIdStatementGet200Response) GetDataOk() (*[]Statement, bool)`
+`func (o *AccountIdJournalGet200Response) GetDataOk() (*[]Statement, bool)`
 
 GetDataOk returns a tuple with the Data field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetData
 
-`func (o *AccountIdStatementGet200Response) SetData(v []Statement)`
+`func (o *AccountIdJournalGet200Response) SetData(v []Statement)`
 
 SetData sets Data field to given value.
 
 ### HasData
 
-`func (o *AccountIdStatementGet200Response) HasData() bool`
+`func (o *AccountIdJournalGet200Response) HasData() bool`
 
 HasData returns a boolean if a field has been set.
 

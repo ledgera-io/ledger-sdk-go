@@ -14,34 +14,34 @@ import (
 	"encoding/json"
 )
 
-// checks if the AccountIdStatementGet200Response type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &AccountIdStatementGet200Response{}
+// checks if the AccountIdJournalGet200Response type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &AccountIdJournalGet200Response{}
 
-// AccountIdStatementGet200Response struct for AccountIdStatementGet200Response
-type AccountIdStatementGet200Response struct {
+// AccountIdJournalGet200Response struct for AccountIdJournalGet200Response
+type AccountIdJournalGet200Response struct {
 	Metadata *Metadata `json:"metadata,omitempty"`
 	Data []Statement `json:"data,omitempty"`
 }
 
-// NewAccountIdStatementGet200Response instantiates a new AccountIdStatementGet200Response object
+// NewAccountIdJournalGet200Response instantiates a new AccountIdJournalGet200Response object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAccountIdStatementGet200Response() *AccountIdStatementGet200Response {
-	this := AccountIdStatementGet200Response{}
+func NewAccountIdJournalGet200Response() *AccountIdJournalGet200Response {
+	this := AccountIdJournalGet200Response{}
 	return &this
 }
 
-// NewAccountIdStatementGet200ResponseWithDefaults instantiates a new AccountIdStatementGet200Response object
+// NewAccountIdJournalGet200ResponseWithDefaults instantiates a new AccountIdJournalGet200Response object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAccountIdStatementGet200ResponseWithDefaults() *AccountIdStatementGet200Response {
-	this := AccountIdStatementGet200Response{}
+func NewAccountIdJournalGet200ResponseWithDefaults() *AccountIdJournalGet200Response {
+	this := AccountIdJournalGet200Response{}
 	return &this
 }
 
 // GetMetadata returns the Metadata field value if set, zero value otherwise.
-func (o *AccountIdStatementGet200Response) GetMetadata() Metadata {
+func (o *AccountIdJournalGet200Response) GetMetadata() Metadata {
 	if o == nil || IsNil(o.Metadata) {
 		var ret Metadata
 		return ret
@@ -51,7 +51,7 @@ func (o *AccountIdStatementGet200Response) GetMetadata() Metadata {
 
 // GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountIdStatementGet200Response) GetMetadataOk() (*Metadata, bool) {
+func (o *AccountIdJournalGet200Response) GetMetadataOk() (*Metadata, bool) {
 	if o == nil || IsNil(o.Metadata) {
 		return nil, false
 	}
@@ -59,7 +59,7 @@ func (o *AccountIdStatementGet200Response) GetMetadataOk() (*Metadata, bool) {
 }
 
 // HasMetadata returns a boolean if a field has been set.
-func (o *AccountIdStatementGet200Response) HasMetadata() bool {
+func (o *AccountIdJournalGet200Response) HasMetadata() bool {
 	if o != nil && !IsNil(o.Metadata) {
 		return true
 	}
@@ -68,12 +68,12 @@ func (o *AccountIdStatementGet200Response) HasMetadata() bool {
 }
 
 // SetMetadata gets a reference to the given Metadata and assigns it to the Metadata field.
-func (o *AccountIdStatementGet200Response) SetMetadata(v Metadata) {
+func (o *AccountIdJournalGet200Response) SetMetadata(v Metadata) {
 	o.Metadata = &v
 }
 
 // GetData returns the Data field value if set, zero value otherwise.
-func (o *AccountIdStatementGet200Response) GetData() []Statement {
+func (o *AccountIdJournalGet200Response) GetData() []Statement {
 	if o == nil || IsNil(o.Data) {
 		var ret []Statement
 		return ret
@@ -83,7 +83,7 @@ func (o *AccountIdStatementGet200Response) GetData() []Statement {
 
 // GetDataOk returns a tuple with the Data field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AccountIdStatementGet200Response) GetDataOk() ([]Statement, bool) {
+func (o *AccountIdJournalGet200Response) GetDataOk() ([]Statement, bool) {
 	if o == nil || IsNil(o.Data) {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *AccountIdStatementGet200Response) GetDataOk() ([]Statement, bool) {
 }
 
 // HasData returns a boolean if a field has been set.
-func (o *AccountIdStatementGet200Response) HasData() bool {
+func (o *AccountIdJournalGet200Response) HasData() bool {
 	if o != nil && !IsNil(o.Data) {
 		return true
 	}
@@ -100,11 +100,11 @@ func (o *AccountIdStatementGet200Response) HasData() bool {
 }
 
 // SetData gets a reference to the given []Statement and assigns it to the Data field.
-func (o *AccountIdStatementGet200Response) SetData(v []Statement) {
+func (o *AccountIdJournalGet200Response) SetData(v []Statement) {
 	o.Data = v
 }
 
-func (o AccountIdStatementGet200Response) MarshalJSON() ([]byte, error) {
+func (o AccountIdJournalGet200Response) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -112,7 +112,7 @@ func (o AccountIdStatementGet200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o AccountIdStatementGet200Response) ToMap() (map[string]interface{}, error) {
+func (o AccountIdJournalGet200Response) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Metadata) {
 		toSerialize["metadata"] = o.Metadata
@@ -123,38 +123,38 @@ func (o AccountIdStatementGet200Response) ToMap() (map[string]interface{}, error
 	return toSerialize, nil
 }
 
-type NullableAccountIdStatementGet200Response struct {
-	value *AccountIdStatementGet200Response
+type NullableAccountIdJournalGet200Response struct {
+	value *AccountIdJournalGet200Response
 	isSet bool
 }
 
-func (v NullableAccountIdStatementGet200Response) Get() *AccountIdStatementGet200Response {
+func (v NullableAccountIdJournalGet200Response) Get() *AccountIdJournalGet200Response {
 	return v.value
 }
 
-func (v *NullableAccountIdStatementGet200Response) Set(val *AccountIdStatementGet200Response) {
+func (v *NullableAccountIdJournalGet200Response) Set(val *AccountIdJournalGet200Response) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAccountIdStatementGet200Response) IsSet() bool {
+func (v NullableAccountIdJournalGet200Response) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAccountIdStatementGet200Response) Unset() {
+func (v *NullableAccountIdJournalGet200Response) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAccountIdStatementGet200Response(val *AccountIdStatementGet200Response) *NullableAccountIdStatementGet200Response {
-	return &NullableAccountIdStatementGet200Response{value: val, isSet: true}
+func NewNullableAccountIdJournalGet200Response(val *AccountIdJournalGet200Response) *NullableAccountIdJournalGet200Response {
+	return &NullableAccountIdJournalGet200Response{value: val, isSet: true}
 }
 
-func (v NullableAccountIdStatementGet200Response) MarshalJSON() ([]byte, error) {
+func (v NullableAccountIdJournalGet200Response) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAccountIdStatementGet200Response) UnmarshalJSON(src []byte) error {
+func (v *NullableAccountIdJournalGet200Response) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
