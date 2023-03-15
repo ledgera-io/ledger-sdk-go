@@ -1,5 +1,4 @@
 .gitignore
-.openapi-generator-ignore
 .travis.yml
 README.md
 api/openapi.yaml
@@ -41,6 +40,4 @@ model_transaction_entry.go
 model_unprocessable_entity.go
 model_validation_error.go
 response.go
-test/api_account_test.go
-test/api_transaction_test.go
 utils.go
