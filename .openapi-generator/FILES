@@ -8,7 +8,6 @@ client.go
 configuration.go
 docs/Account.md
 docs/AccountApi.md
-docs/AccountIdJournalGet200Response.md
 docs/AccountPostRequest.md
 docs/AccountType.md
 docs/Balance.md
@@ -21,12 +20,13 @@ docs/Statement.md
 docs/TransactionApi.md
 docs/TransactionEntry.md
 docs/UnprocessableEntity.md
+docs/V1AccountIdJournalGet200Response.md
 docs/ValidationError.md
 git_push.sh
 go.mod
 go.sum
-model__account__id__journal_get_200_response.go
 model__account_post_request.go
+model__v1_account__id__journal_get_200_response.go
 model_account.go
 model_account_type.go
 model_balance.go

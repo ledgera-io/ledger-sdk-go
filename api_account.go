@@ -132,154 +132,6 @@ func (a *AccountApiService) AccountGetExecute(r ApiAccountGetRequest) (*Account,
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAccountIdJournalGetRequest struct {
-	ctx context.Context
-	ApiService *AccountApiService
-	id string
-	limit *int32
-	cursor *string
-	dateFrom *string
-	dateTo *string
-	entryType *string
-}
-
-func (r ApiAccountIdJournalGetRequest) Limit(limit int32) ApiAccountIdJournalGetRequest {
-	r.limit = &limit
-	return r
-}
-
-func (r ApiAccountIdJournalGetRequest) Cursor(cursor string) ApiAccountIdJournalGetRequest {
-	r.cursor = &cursor
-	return r
-}
-
-func (r ApiAccountIdJournalGetRequest) DateFrom(dateFrom string) ApiAccountIdJournalGetRequest {
-	r.dateFrom = &dateFrom
-	return r
-}
-
-func (r ApiAccountIdJournalGetRequest) DateTo(dateTo string) ApiAccountIdJournalGetRequest {
-	r.dateTo = &dateTo
-	return r
-}
-
-func (r ApiAccountIdJournalGetRequest) EntryType(entryType string) ApiAccountIdJournalGetRequest {
-	r.entryType = &entryType
-	return r
-}
-
-func (r ApiAccountIdJournalGetRequest) Execute() (*AccountIdJournalGet200Response, *http.Response, error) {
-	return r.ApiService.AccountIdJournalGetExecute(r)
-}
-
-/*
-AccountIdJournalGet Method for AccountIdJournalGet
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id account ID
- @return ApiAccountIdJournalGetRequest
-*/
-func (a *AccountApiService) AccountIdJournalGet(ctx context.Context, id string) ApiAccountIdJournalGetRequest {
-	return ApiAccountIdJournalGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return AccountIdJournalGet200Response
-func (a *AccountApiService) AccountIdJournalGetExecute(r ApiAccountIdJournalGetRequest) (*AccountIdJournalGet200Response, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AccountIdJournalGet200Response
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountApiService.AccountIdJournalGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/account/{id}/journal"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.limit == nil {
-		return localVarReturnValue, nil, reportError("limit is required and must be specified")
-	}
-	if r.cursor == nil {
-		return localVarReturnValue, nil, reportError("cursor is required and must be specified")
-	}
-
-	parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
-	if r.dateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date_from", r.dateFrom, "")
-	}
-	if r.dateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "date_to", r.dateTo, "")
-	}
-	if r.entryType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "entry_type", r.entryType, "")
-	}
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiAccountPostRequest struct {
 	ctx context.Context
 	ApiService *AccountApiService
@@ -350,6 +202,154 @@ func (a *AccountApiService) AccountPostExecute(r ApiAccountPostRequest) (*Accoun
 	}
 	// body params
 	localVarPostBody = r.accountPostRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV1AccountIdJournalGetRequest struct {
+	ctx context.Context
+	ApiService *AccountApiService
+	id string
+	limit *int32
+	cursor *string
+	dateFrom *string
+	dateTo *string
+	entryType *string
+}
+
+func (r ApiV1AccountIdJournalGetRequest) Limit(limit int32) ApiV1AccountIdJournalGetRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ApiV1AccountIdJournalGetRequest) Cursor(cursor string) ApiV1AccountIdJournalGetRequest {
+	r.cursor = &cursor
+	return r
+}
+
+func (r ApiV1AccountIdJournalGetRequest) DateFrom(dateFrom string) ApiV1AccountIdJournalGetRequest {
+	r.dateFrom = &dateFrom
+	return r
+}
+
+func (r ApiV1AccountIdJournalGetRequest) DateTo(dateTo string) ApiV1AccountIdJournalGetRequest {
+	r.dateTo = &dateTo
+	return r
+}
+
+func (r ApiV1AccountIdJournalGetRequest) EntryType(entryType string) ApiV1AccountIdJournalGetRequest {
+	r.entryType = &entryType
+	return r
+}
+
+func (r ApiV1AccountIdJournalGetRequest) Execute() (*V1AccountIdJournalGet200Response, *http.Response, error) {
+	return r.ApiService.V1AccountIdJournalGetExecute(r)
+}
+
+/*
+V1AccountIdJournalGet Method for V1AccountIdJournalGet
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id account ID
+ @return ApiV1AccountIdJournalGetRequest
+*/
+func (a *AccountApiService) V1AccountIdJournalGet(ctx context.Context, id string) ApiV1AccountIdJournalGetRequest {
+	return ApiV1AccountIdJournalGetRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
+	}
+}
+
+// Execute executes the request
+//  @return V1AccountIdJournalGet200Response
+func (a *AccountApiService) V1AccountIdJournalGetExecute(r ApiV1AccountIdJournalGetRequest) (*V1AccountIdJournalGet200Response, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *V1AccountIdJournalGet200Response
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountApiService.V1AccountIdJournalGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/account/{id}/journal"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.limit == nil {
+		return localVarReturnValue, nil, reportError("limit is required and must be specified")
+	}
+	if r.cursor == nil {
+		return localVarReturnValue, nil, reportError("cursor is required and must be specified")
+	}
+
+	parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "cursor", r.cursor, "")
+	if r.dateFrom != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date_from", r.dateFrom, "")
+	}
+	if r.dateTo != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "date_to", r.dateTo, "")
+	}
+	if r.entryType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "entry_type", r.entryType, "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

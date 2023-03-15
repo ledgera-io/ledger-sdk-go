@@ -34,7 +34,7 @@ paths:
           description: Conflict
       tags:
       - transaction
-  /account/{id}/journal:
+  /v1/account/{id}/journal:
     get:
       parameters:
       - description: account ID
@@ -94,7 +94,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_account__id__journal_get_200_response'
+                $ref: '#/components/schemas/_v1_account__id__journal_get_200_response'
           description: Ok
       tags:
       - account
@@ -357,7 +357,7 @@ components:
         amount:
           type: string
       type: object
-    _account__id__journal_get_200_response:
+    _v1_account__id__journal_get_200_response:
       example:
         metadata:
           nextCursor: nextCursor

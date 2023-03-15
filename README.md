@@ -78,8 +78,8 @@ All URIs are relative to *https://api.ledgera.io/v1*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *AccountApi* | [**AccountGet**](docs/AccountApi.md#accountget) | **Get** /account | 
-*AccountApi* | [**AccountIdJournalGet**](docs/AccountApi.md#accountidjournalget) | **Get** /account/{id}/journal | 
 *AccountApi* | [**AccountPost**](docs/AccountApi.md#accountpost) | **Post** /account | 
+*AccountApi* | [**V1AccountIdJournalGet**](docs/AccountApi.md#v1accountidjournalget) | **Get** /v1/account/{id}/journal | 
 *TransactionApi* | [**TransactionGet**](docs/TransactionApi.md#transactionget) | **Get** /transaction | 
 *TransactionApi* | [**TransactionPost**](docs/TransactionApi.md#transactionpost) | **Post** /transaction | 
 
@@ -87,7 +87,6 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Account](docs/Account.md)
- - [AccountIdJournalGet200Response](docs/AccountIdJournalGet200Response.md)
  - [AccountPostRequest](docs/AccountPostRequest.md)
  - [AccountType](docs/AccountType.md)
  - [Balance](docs/Balance.md)
@@ -99,6 +98,7 @@ Class | Method | HTTP request | Description
  - [Statement](docs/Statement.md)
  - [TransactionEntry](docs/TransactionEntry.md)
  - [UnprocessableEntity](docs/UnprocessableEntity.md)
+ - [V1AccountIdJournalGet200Response](docs/V1AccountIdJournalGet200Response.md)
  - [ValidationError](docs/ValidationError.md)
 
 

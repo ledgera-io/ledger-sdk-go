@@ -5,8 +5,8 @@ All URIs are relative to *https://api.ledgera.io/v1*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AccountGet**](AccountApi.md#AccountGet) | **Get** /account | 
-[**AccountIdJournalGet**](AccountApi.md#AccountIdJournalGet) | **Get** /account/{id}/journal | 
 [**AccountPost**](AccountApi.md#AccountPost) | **Post** /account | 
+[**V1AccountIdJournalGet**](AccountApi.md#V1AccountIdJournalGet) | **Get** /v1/account/{id}/journal | 
 
 
 
@@ -56,84 +56,6 @@ Other parameters are passed through a pointer to a apiAccountGetRequest struct v
 ### Return type
 
 [**Account**](Account.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AccountIdJournalGet
-
-> AccountIdJournalGet200Response AccountIdJournalGet(ctx, id).Limit(limit).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).EntryType(entryType).Execute()
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | account ID
-    limit := int32(1) // int32 | 
-    cursor := "MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=" // string | 
-    dateFrom := "2023-03-13T21:33:07.202Z" // string |  (optional)
-    dateTo := "2023-03-13T21:33:07.202Z" // string |  (optional)
-    entryType := "DEBIT" // string |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountApi.AccountIdJournalGet(context.Background(), id).Limit(limit).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).EntryType(entryType).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountApi.AccountIdJournalGet``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AccountIdJournalGet`: AccountIdJournalGet200Response
-    fmt.Fprintf(os.Stdout, "Response from `AccountApi.AccountIdJournalGet`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** | account ID | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAccountIdJournalGetRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **limit** | **int32** |  | 
- **cursor** | **string** |  | 
- **dateFrom** | **string** |  | 
- **dateTo** | **string** |  | 
- **entryType** | **string** |  | 
-
-### Return type
-
-[**AccountIdJournalGet200Response**](AccountIdJournalGet200Response.md)
 
 ### Authorization
 
@@ -208,6 +130,84 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: application/json:
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1AccountIdJournalGet
+
+> V1AccountIdJournalGet200Response V1AccountIdJournalGet(ctx, id).Limit(limit).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).EntryType(entryType).Execute()
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := "684936a4-f1f5-48ed-9378-ca9e31cf76a7" // string | account ID
+    limit := int32(1) // int32 | 
+    cursor := "MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=" // string | 
+    dateFrom := "2023-03-13T21:33:07.202Z" // string |  (optional)
+    dateTo := "2023-03-13T21:33:07.202Z" // string |  (optional)
+    entryType := "DEBIT" // string |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountApi.V1AccountIdJournalGet(context.Background(), id).Limit(limit).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).EntryType(entryType).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountApi.V1AccountIdJournalGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1AccountIdJournalGet`: V1AccountIdJournalGet200Response
+    fmt.Fprintf(os.Stdout, "Response from `AccountApi.V1AccountIdJournalGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | account ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1AccountIdJournalGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **limit** | **int32** |  | 
+ **cursor** | **string** |  | 
+ **dateFrom** | **string** |  | 
+ **dateTo** | **string** |  | 
+ **entryType** | **string** |  | 
+
+### Return type
+
+[**V1AccountIdJournalGet200Response**](V1AccountIdJournalGet200Response.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
