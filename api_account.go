@@ -29,7 +29,7 @@ type ApiV1AccountIdBalancesGetRequest struct {
 	id string
 }
 
-func (r ApiV1AccountIdBalancesGetRequest) Execute() (*LedgerAccount, *http.Response, error) {
+func (r ApiV1AccountIdBalancesGetRequest) Execute() (*HelperPaginatedArrayLedgerBalance, *http.Response, error) {
 	return r.ApiService.V1AccountIdBalancesGetExecute(r)
 }
 
@@ -51,13 +51,13 @@ func (a *AccountLedgeraService) V1AccountIdBalancesGet(ctx context.Context, id s
 }
 
 // Execute executes the request
-//  @return LedgerAccount
-func (a *AccountLedgeraService) V1AccountIdBalancesGetExecute(r ApiV1AccountIdBalancesGetRequest) (*LedgerAccount, *http.Response, error) {
+//  @return HelperPaginatedArrayLedgerBalance
+func (a *AccountLedgeraService) V1AccountIdBalancesGetExecute(r ApiV1AccountIdBalancesGetRequest) (*HelperPaginatedArrayLedgerBalance, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LedgerAccount
+		localVarReturnValue  *HelperPaginatedArrayLedgerBalance
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1AccountIdBalancesGet")

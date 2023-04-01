@@ -26,6 +26,7 @@ docs/BillingPlanLedgera.md
 docs/BillingTransactionEntry.md
 docs/ExceptionEntityNotFound.md
 docs/ExceptionValidationDetails.md
+docs/HelperPaginatedArrayLedgerBalance.md
 docs/HelperPaginatedArrayLedgerCurrency.md
 docs/HelperPaginatedArrayLedgerJournalEntry.md
 docs/HelperPaginatedLedgerAccount.md
@@ -67,6 +68,7 @@ model_billing_create_bulk_billing.go
 model_billing_transaction_entry.go
 model_exception_entity_not_found.go
 model_exception_validation_details.go
+model_helper_paginated_array_ledger_balance.go
 model_helper_paginated_array_ledger_currency.go
 model_helper_paginated_array_ledger_journal_entry.go
 model_helper_paginated_ledger_account.go

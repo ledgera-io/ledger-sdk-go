@@ -118,6 +118,7 @@ Class | Method | HTTP request | Description
  - [BillingTransactionEntry](docs/BillingTransactionEntry.md)
  - [ExceptionEntityNotFound](docs/ExceptionEntityNotFound.md)
  - [ExceptionValidationDetails](docs/ExceptionValidationDetails.md)
+ - [HelperPaginatedArrayLedgerBalance](docs/HelperPaginatedArrayLedgerBalance.md)
  - [HelperPaginatedArrayLedgerCurrency](docs/HelperPaginatedArrayLedgerCurrency.md)
  - [HelperPaginatedArrayLedgerJournalEntry](docs/HelperPaginatedArrayLedgerJournalEntry.md)
  - [HelperPaginatedLedgerAccount](docs/HelperPaginatedLedgerAccount.md)

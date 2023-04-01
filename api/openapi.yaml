@@ -378,7 +378,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ledger.Account'
+                $ref: '#/components/schemas/helper.Paginated-array_ledger_Balance'
           description: OK
         "404":
           content:
@@ -839,6 +839,35 @@ components:
         value:
           type: string
       type: object
+    helper.Paginated-array_ledger_Balance:
+      example:
+        metadata:
+          key: metadata
+        data:
+        - accountId: accountId
+          createdAt: createdAt
+          amount: 0.8008281904610115
+          seqNum: 6
+          currency: currency
+          type: type
+          updatedAt: updatedAt
+        - accountId: accountId
+          createdAt: createdAt
+          amount: 0.8008281904610115
+          seqNum: 6
+          currency: currency
+          type: type
+          updatedAt: updatedAt
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ledger.Balance'
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     helper.Paginated-array_ledger_Currency:
       example:
         metadata:
@@ -1115,7 +1144,7 @@ components:
       type: object
     ledger.JournalEntry:
       example:
-        amount: 0.8008281904610115
+        amount: "0.8008281904610115"
         metadata: "{}"
         entryLabel: entryLabel
         entryOrder: 1
@@ -1130,7 +1159,7 @@ components:
         balanceType: balanceType
         conciliationId: conciliationId
         settledAt: settledAt
-        balanceAfter: 6.027456183070403
+        balanceAfter: "6.027456183070403"
         currency: currency
         id: id
         processType: processType

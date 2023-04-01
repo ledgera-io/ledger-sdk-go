@@ -15,7 +15,7 @@ Method | HTTP request | Description
 
 ## V1AccountIdBalancesGet
 
-> LedgerAccount V1AccountIdBalancesGet(ctx, id).Execute()
+> HelperPaginatedArrayLedgerBalance V1AccountIdBalancesGet(ctx, id).Execute()
 
 Get a account balances
 
@@ -43,7 +43,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdBalancesGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `V1AccountIdBalancesGet`: LedgerAccount
+    // response from `V1AccountIdBalancesGet`: HelperPaginatedArrayLedgerBalance
     fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdBalancesGet`: %v\n", resp)
 }
 ```
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**LedgerAccount**](LedgerAccount.md)
+[**HelperPaginatedArrayLedgerBalance**](HelperPaginatedArrayLedgerBalance.md)
 
 ### Authorization
 
