@@ -46,11 +46,13 @@ paths:
       description: Get transaction
       parameters:
       - description: Transaction ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -233,11 +235,13 @@ paths:
       description: Delete account plan
       parameters:
       - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -258,11 +262,13 @@ paths:
       description: Get account plan
       parameters:
       - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -277,11 +283,13 @@ paths:
       description: Update account plan
       parameters:
       - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -302,11 +310,13 @@ paths:
     post:
       description: Bulk create account plan
       parameters:
-      - in: query
+      - explode: true
+        in: query
         name: id
         required: true
         schema:
           type: string
+        style: form
       responses:
         "201":
           content:
@@ -328,11 +338,13 @@ paths:
       description: Get account account
       parameters:
       - description: Account ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -354,11 +366,13 @@ paths:
       description: Get account balances
       parameters:
       - description: Account ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -380,25 +394,38 @@ paths:
       description: Get account journal
       parameters:
       - description: Account ID
+        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-      - in: query
+        style: simple
+      - explode: true
+        in: query
         name: cursor
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: date_from
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: date_to
+        required: false
         schema:
           type: string
-      - in: query
+        style: form
+      - explode: true
+        in: query
         name: type
+        required: false
         schema:
           enum:
           - DEBIT
@@ -407,13 +434,17 @@ paths:
           x-enum-varnames:
           - JournalQueryTypeDebit
           - JournalQueryTypeCredit
+        style: form
         x-enum-varnames:
         - JournalQueryTypeDebit
         - JournalQueryTypeCredit
-      - in: query
+      - explode: true
+        in: query
         name: limit
+        required: false
         schema:
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -476,11 +507,13 @@ paths:
       description: Get billing plan by ID
       parameters:
       - description: Billing plan ID
+        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -501,11 +534,13 @@ paths:
       description: Update billing plan
       parameters:
       - description: Billing plan ID
+        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -727,11 +762,11 @@ components:
       example:
         transactionType: transactionType
         entryType: entryType
-        amount: 0.8008281904610115
+        amount: "0.8008281904610115"
         type: null
       properties:
         amount:
-          type: number
+          type: string
         entryType:
           type: string
         transactionType:
@@ -1038,7 +1073,7 @@ components:
       example:
         accountId: accountId
         createdAt: createdAt
-        amount: 0.8008281904610115
+        amount: "0.8008281904610115"
         seqNum: 6
         currency: currency
         type: type
@@ -1047,7 +1082,7 @@ components:
         accountId:
           type: string
         amount:
-          type: number
+          type: string
         createdAt:
           type: string
         currency:
@@ -1107,9 +1142,9 @@ components:
         accountType:
           type: string
         amount:
-          type: number
+          type: string
         balanceAfter:
-          type: number
+          type: string
         balanceType:
           type: string
         conciliationId:

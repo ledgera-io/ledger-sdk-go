@@ -19,7 +19,7 @@ var _ MappedNullable = &BillingBillingTransaction{}
 
 // BillingBillingTransaction struct for BillingBillingTransaction
 type BillingBillingTransaction struct {
-	Amount *float32 `json:"amount,omitempty"`
+	Amount *string `json:"amount,omitempty"`
 	EntryType *string `json:"entryType,omitempty"`
 	TransactionType *string `json:"transactionType,omitempty"`
 	Type *BillingBillingTransactionAmountType `json:"type,omitempty"`
@@ -43,9 +43,9 @@ func NewBillingBillingTransactionWithDefaults() *BillingBillingTransaction {
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *BillingBillingTransaction) GetAmount() float32 {
+func (o *BillingBillingTransaction) GetAmount() string {
 	if o == nil || IsNil(o.Amount) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.Amount
@@ -53,7 +53,7 @@ func (o *BillingBillingTransaction) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BillingBillingTransaction) GetAmountOk() (*float32, bool) {
+func (o *BillingBillingTransaction) GetAmountOk() (*string, bool) {
 	if o == nil || IsNil(o.Amount) {
 		return nil, false
 	}
@@ -69,8 +69,8 @@ func (o *BillingBillingTransaction) HasAmount() bool {
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *BillingBillingTransaction) SetAmount(v float32) {
+// SetAmount gets a reference to the given string and assigns it to the Amount field.
+func (o *BillingBillingTransaction) SetAmount(v string) {
 	o.Amount = &v
 }
 

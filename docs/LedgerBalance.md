@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AccountId** | **string** |  | 
-**Amount** | **float32** |  | 
+**Amount** | **string** |  | 
 **CreatedAt** | Pointer to **string** |  | [optional] 
 **Currency** | **string** |  | 
 **SeqNum** | **int32** |  | 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewLedgerBalance
 
-`func NewLedgerBalance(accountId string, amount float32, currency string, seqNum int32, type_ string, ) *LedgerBalance`
+`func NewLedgerBalance(accountId string, amount string, currency string, seqNum int32, type_ string, ) *LedgerBalance`
 
 NewLedgerBalance instantiates a new LedgerBalance object
 This constructor will assign default values to properties that have it defined,
@@ -53,20 +53,20 @@ SetAccountId sets AccountId field to given value.
 
 ### GetAmount
 
-`func (o *LedgerBalance) GetAmount() float32`
+`func (o *LedgerBalance) GetAmount() string`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *LedgerBalance) GetAmountOk() (*float32, bool)`
+`func (o *LedgerBalance) GetAmountOk() (*string, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *LedgerBalance) SetAmount(v float32)`
+`func (o *LedgerBalance) SetAmount(v string)`
 
 SetAmount sets Amount field to given value.
 

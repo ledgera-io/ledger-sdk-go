@@ -22,8 +22,8 @@ type LedgerJournalEntry struct {
 	AccountId *string `json:"accountId,omitempty"`
 	AccountSubType *string `json:"accountSubType,omitempty"`
 	AccountType *string `json:"accountType,omitempty"`
-	Amount *float32 `json:"amount,omitempty"`
-	BalanceAfter *float32 `json:"balanceAfter,omitempty"`
+	Amount *string `json:"amount,omitempty"`
+	BalanceAfter *string `json:"balanceAfter,omitempty"`
 	BalanceType *string `json:"balanceType,omitempty"`
 	ConciliationId *string `json:"conciliationId,omitempty"`
 	CreatedAt *string `json:"createdAt,omitempty"`
@@ -154,9 +154,9 @@ func (o *LedgerJournalEntry) SetAccountType(v string) {
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *LedgerJournalEntry) GetAmount() float32 {
+func (o *LedgerJournalEntry) GetAmount() string {
 	if o == nil || IsNil(o.Amount) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.Amount
@@ -164,7 +164,7 @@ func (o *LedgerJournalEntry) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LedgerJournalEntry) GetAmountOk() (*float32, bool) {
+func (o *LedgerJournalEntry) GetAmountOk() (*string, bool) {
 	if o == nil || IsNil(o.Amount) {
 		return nil, false
 	}
@@ -180,15 +180,15 @@ func (o *LedgerJournalEntry) HasAmount() bool {
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *LedgerJournalEntry) SetAmount(v float32) {
+// SetAmount gets a reference to the given string and assigns it to the Amount field.
+func (o *LedgerJournalEntry) SetAmount(v string) {
 	o.Amount = &v
 }
 
 // GetBalanceAfter returns the BalanceAfter field value if set, zero value otherwise.
-func (o *LedgerJournalEntry) GetBalanceAfter() float32 {
+func (o *LedgerJournalEntry) GetBalanceAfter() string {
 	if o == nil || IsNil(o.BalanceAfter) {
-		var ret float32
+		var ret string
 		return ret
 	}
 	return *o.BalanceAfter
@@ -196,7 +196,7 @@ func (o *LedgerJournalEntry) GetBalanceAfter() float32 {
 
 // GetBalanceAfterOk returns a tuple with the BalanceAfter field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *LedgerJournalEntry) GetBalanceAfterOk() (*float32, bool) {
+func (o *LedgerJournalEntry) GetBalanceAfterOk() (*string, bool) {
 	if o == nil || IsNil(o.BalanceAfter) {
 		return nil, false
 	}
@@ -212,8 +212,8 @@ func (o *LedgerJournalEntry) HasBalanceAfter() bool {
 	return false
 }
 
-// SetBalanceAfter gets a reference to the given float32 and assigns it to the BalanceAfter field.
-func (o *LedgerJournalEntry) SetBalanceAfter(v float32) {
+// SetBalanceAfter gets a reference to the given string and assigns it to the BalanceAfter field.
+func (o *LedgerJournalEntry) SetBalanceAfter(v string) {
 	o.BalanceAfter = &v
 }
 

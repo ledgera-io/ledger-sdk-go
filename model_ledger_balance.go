@@ -20,7 +20,7 @@ var _ MappedNullable = &LedgerBalance{}
 // LedgerBalance struct for LedgerBalance
 type LedgerBalance struct {
 	AccountId string `json:"accountId"`
-	Amount float32 `json:"amount"`
+	Amount string `json:"amount"`
 	CreatedAt *string `json:"createdAt,omitempty"`
 	Currency string `json:"currency"`
 	SeqNum int32 `json:"seqNum"`
@@ -32,7 +32,7 @@ type LedgerBalance struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewLedgerBalance(accountId string, amount float32, currency string, seqNum int32, type_ string) *LedgerBalance {
+func NewLedgerBalance(accountId string, amount string, currency string, seqNum int32, type_ string) *LedgerBalance {
 	this := LedgerBalance{}
 	this.AccountId = accountId
 	this.Amount = amount
@@ -75,9 +75,9 @@ func (o *LedgerBalance) SetAccountId(v string) {
 }
 
 // GetAmount returns the Amount field value
-func (o *LedgerBalance) GetAmount() float32 {
+func (o *LedgerBalance) GetAmount() string {
 	if o == nil {
-		var ret float32
+		var ret string
 		return ret
 	}
 
@@ -86,7 +86,7 @@ func (o *LedgerBalance) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *LedgerBalance) GetAmountOk() (*float32, bool) {
+func (o *LedgerBalance) GetAmountOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -94,7 +94,7 @@ func (o *LedgerBalance) GetAmountOk() (*float32, bool) {
 }
 
 // SetAmount sets field value
-func (o *LedgerBalance) SetAmount(v float32) {
+func (o *LedgerBalance) SetAmount(v string) {
 	o.Amount = v
 }
 

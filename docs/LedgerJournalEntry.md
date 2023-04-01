@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **AccountId** | Pointer to **string** |  | [optional] 
 **AccountSubType** | Pointer to **string** |  | [optional] 
 **AccountType** | Pointer to **string** |  | [optional] 
-**Amount** | Pointer to **float32** |  | [optional] 
-**BalanceAfter** | Pointer to **float32** |  | [optional] 
+**Amount** | Pointer to **string** |  | [optional] 
+**BalanceAfter** | Pointer to **string** |  | [optional] 
 **BalanceType** | Pointer to **string** |  | [optional] 
 **ConciliationId** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **string** |  | [optional] 
@@ -120,20 +120,20 @@ HasAccountType returns a boolean if a field has been set.
 
 ### GetAmount
 
-`func (o *LedgerJournalEntry) GetAmount() float32`
+`func (o *LedgerJournalEntry) GetAmount() string`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *LedgerJournalEntry) GetAmountOk() (*float32, bool)`
+`func (o *LedgerJournalEntry) GetAmountOk() (*string, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *LedgerJournalEntry) SetAmount(v float32)`
+`func (o *LedgerJournalEntry) SetAmount(v string)`
 
 SetAmount sets Amount field to given value.
 
@@ -145,20 +145,20 @@ HasAmount returns a boolean if a field has been set.
 
 ### GetBalanceAfter
 
-`func (o *LedgerJournalEntry) GetBalanceAfter() float32`
+`func (o *LedgerJournalEntry) GetBalanceAfter() string`
 
 GetBalanceAfter returns the BalanceAfter field if non-nil, zero value otherwise.
 
 ### GetBalanceAfterOk
 
-`func (o *LedgerJournalEntry) GetBalanceAfterOk() (*float32, bool)`
+`func (o *LedgerJournalEntry) GetBalanceAfterOk() (*string, bool)`
 
 GetBalanceAfterOk returns a tuple with the BalanceAfter field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBalanceAfter
 
-`func (o *LedgerJournalEntry) SetBalanceAfter(v float32)`
+`func (o *LedgerJournalEntry) SetBalanceAfter(v string)`
 
 SetBalanceAfter sets BalanceAfter field to given value.
 
