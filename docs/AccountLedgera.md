@@ -1,0 +1,417 @@
+# \AccountLedgera
+
+All URIs are relative to *http://localhost*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**Teste**](AccountLedgera.md#Teste) | **Post** /v1/currency | Get a ledger currencies
+[**V1AccountIdBalancesGet**](AccountLedgera.md#V1AccountIdBalancesGet) | **Get** /v1/account/{id}/balances | Get a account balances
+[**V1AccountIdGet**](AccountLedgera.md#V1AccountIdGet) | **Get** /v1/account/{id} | Get a account from id
+[**V1AccountIdJournalGet**](AccountLedgera.md#V1AccountIdJournalGet) | **Get** /v1/account/{id}/journal | Get a account journal
+[**V1AccountPost**](AccountLedgera.md#V1AccountPost) | **Post** /v1/account | Create a account
+[**V1CurrencyGet**](AccountLedgera.md#V1CurrencyGet) | **Get** /v1/currency | Get a ledger currencies
+
+
+
+## Teste
+
+> LedgerCurrency Teste(ctx).Currency(currency).Execute()
+
+Get a ledger currencies
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    currency := *openapiclient.NewHttpCurrencyParams("Code_example", "Name_example") // HttpCurrencyParams | Currency JSON
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.Teste(context.Background()).Currency(currency).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.Teste``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `Teste`: LedgerCurrency
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.Teste`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiTesteRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **currency** | [**HttpCurrencyParams**](HttpCurrencyParams.md) | Currency JSON | 
+
+### Return type
+
+[**LedgerCurrency**](LedgerCurrency.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1AccountIdBalancesGet
+
+> LedgerAccount V1AccountIdBalancesGet(ctx, id).Execute()
+
+Get a account balances
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1AccountIdBalancesGet(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdBalancesGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1AccountIdBalancesGet`: LedgerAccount
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdBalancesGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1AccountIdBalancesGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**LedgerAccount**](LedgerAccount.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1AccountIdGet
+
+> HelperPaginatedLedgerBalance V1AccountIdGet(ctx, id).Execute()
+
+Get a account from id
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := "id_example" // string | Account ID
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1AccountIdGet(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1AccountIdGet`: HelperPaginatedLedgerBalance
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** | Account ID | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1AccountIdGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HelperPaginatedLedgerBalance**](HelperPaginatedLedgerBalance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1AccountIdJournalGet
+
+> HelperPaginatedLedgerJournalEntry V1AccountIdJournalGet(ctx, id).Execute()
+
+Get a account journal
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    id := "id_example" // string | 
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1AccountIdJournalGet(context.Background(), id).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdJournalGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1AccountIdJournalGet`: HelperPaginatedLedgerJournalEntry
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdJournalGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**id** | **string** |  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1AccountIdJournalGetRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**HelperPaginatedLedgerJournalEntry**](HelperPaginatedLedgerJournalEntry.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1AccountPost
+
+> LedgerAccount V1AccountPost(ctx).Account(account).Execute()
+
+Create a account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    account := *openapiclient.NewHttpRegisterAccount([]string{"Currencies_example"}, "SubType_example", "Type_example") // HttpRegisterAccount | Account JSON
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1AccountPost(context.Background()).Account(account).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1AccountPost`: LedgerAccount
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1AccountPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **account** | [**HttpRegisterAccount**](HttpRegisterAccount.md) | Account JSON | 
+
+### Return type
+
+[**LedgerAccount**](LedgerAccount.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1CurrencyGet
+
+> HelperPaginatedArrayLedgerCurrency V1CurrencyGet(ctx).Execute()
+
+Get a ledger currencies
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1CurrencyGet(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1CurrencyGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1CurrencyGet`: HelperPaginatedArrayLedgerCurrency
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1CurrencyGet`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1CurrencyGetRequest struct via the builder pattern
+
+
+### Return type
+
+[**HelperPaginatedArrayLedgerCurrency**](HelperPaginatedArrayLedgerCurrency.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+

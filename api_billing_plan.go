@@ -20,56 +20,282 @@ import (
 )
 
 
-// AccountLedgeraService AccountLedgera service
-type AccountLedgeraService service
+// BillingPlanLedgeraService BillingPlanLedgera service
+type BillingPlanLedgeraService service
 
-type ApiTesteRequest struct {
+type ApiV1BillingBillingPlanIdGetRequest struct {
 	ctx context.Context
-	ApiService *AccountLedgeraService
-	currency *HttpCurrencyParams
+	ApiService *BillingPlanLedgeraService
+	billingPlanId string
 }
 
-// Currency JSON
-func (r ApiTesteRequest) Currency(currency HttpCurrencyParams) ApiTesteRequest {
+func (r ApiV1BillingBillingPlanIdGetRequest) Execute() (*BillingBillingPlan, *http.Response, error) {
+	return r.ApiService.V1BillingBillingPlanIdGetExecute(r)
+}
+
+/*
+V1BillingBillingPlanIdGet Get billing plan by ID
+
+Get billing plan by ID
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param billingPlanId Billing ID JSON
+ @return ApiV1BillingBillingPlanIdGetRequest
+*/
+func (a *BillingPlanLedgeraService) V1BillingBillingPlanIdGet(ctx context.Context, billingPlanId string) ApiV1BillingBillingPlanIdGetRequest {
+	return ApiV1BillingBillingPlanIdGetRequest{
+		ApiService: a,
+		ctx: ctx,
+		billingPlanId: billingPlanId,
+	}
+}
+
+// Execute executes the request
+//  @return BillingBillingPlan
+func (a *BillingPlanLedgeraService) V1BillingBillingPlanIdGetExecute(r ApiV1BillingBillingPlanIdGetRequest) (*BillingBillingPlan, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BillingBillingPlan
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingPlanLedgeraService.V1BillingBillingPlanIdGet")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/billing/{billingPlanId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"billingPlanId"+"}", url.PathEscape(parameterValueToString(r.billingPlanId, "billingPlanId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ExceptionEntityNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV1BillingBillingPlanIdPutRequest struct {
+	ctx context.Context
+	ApiService *BillingPlanLedgeraService
+	billingPlanId string
+}
+
+func (r ApiV1BillingBillingPlanIdPutRequest) Execute() (*BillingBillingPlan, *http.Response, error) {
+	return r.ApiService.V1BillingBillingPlanIdPutExecute(r)
+}
+
+/*
+V1BillingBillingPlanIdPut Update billing plan
+
+Update billing plan
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param billingPlanId Billing plan ID
+ @return ApiV1BillingBillingPlanIdPutRequest
+*/
+func (a *BillingPlanLedgeraService) V1BillingBillingPlanIdPut(ctx context.Context, billingPlanId string) ApiV1BillingBillingPlanIdPutRequest {
+	return ApiV1BillingBillingPlanIdPutRequest{
+		ApiService: a,
+		ctx: ctx,
+		billingPlanId: billingPlanId,
+	}
+}
+
+// Execute executes the request
+//  @return BillingBillingPlan
+func (a *BillingPlanLedgeraService) V1BillingBillingPlanIdPutExecute(r ApiV1BillingBillingPlanIdPutRequest) (*BillingBillingPlan, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPut
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BillingBillingPlan
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingPlanLedgeraService.V1BillingBillingPlanIdPut")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/billing/{billingPlanId}"
+	localVarPath = strings.Replace(localVarPath, "{"+"billingPlanId"+"}", url.PathEscape(parameterValueToString(r.billingPlanId, "billingPlanId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ExceptionEntityNotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV1BillingBulkPostRequest struct {
+	ctx context.Context
+	ApiService *BillingPlanLedgeraService
+	currency *BillingCreateBulkBilling
+}
+
+// Billing JSON
+func (r ApiV1BillingBulkPostRequest) Currency(currency BillingCreateBulkBilling) ApiV1BillingBulkPostRequest {
 	r.currency = &currency
 	return r
 }
 
-func (r ApiTesteRequest) Execute() (*LedgerCurrency, *http.Response, error) {
-	return r.ApiService.TesteExecute(r)
+func (r ApiV1BillingBulkPostRequest) Execute() ([]BillingBillingPlan, *http.Response, error) {
+	return r.ApiService.V1BillingBulkPostExecute(r)
 }
 
 /*
-Teste Get a ledger currencies
+V1BillingBulkPost Create billing plan
 
-Get ledger currencies
+Create billing plan
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTesteRequest
+ @return ApiV1BillingBulkPostRequest
 */
-func (a *AccountLedgeraService) Teste(ctx context.Context) ApiTesteRequest {
-	return ApiTesteRequest{
+func (a *BillingPlanLedgeraService) V1BillingBulkPost(ctx context.Context) ApiV1BillingBulkPostRequest {
+	return ApiV1BillingBulkPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return LedgerCurrency
-func (a *AccountLedgeraService) TesteExecute(r ApiTesteRequest) (*LedgerCurrency, *http.Response, error) {
+//  @return []BillingBillingPlan
+func (a *BillingPlanLedgeraService) V1BillingBulkPostExecute(r ApiV1BillingBulkPostRequest) ([]BillingBillingPlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *LedgerCurrency
+		localVarReturnValue  []BillingBillingPlan
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.Teste")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingPlanLedgeraService.V1BillingBulkPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/currency"
+	localVarPath := localBasePath + "/v1/billing/bulk"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -119,467 +345,6 @@ func (a *AccountLedgeraService) TesteExecute(r ApiTesteRequest) (*LedgerCurrency
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
 		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV1AccountIdBalancesGetRequest struct {
-	ctx context.Context
-	ApiService *AccountLedgeraService
-	id string
-}
-
-func (r ApiV1AccountIdBalancesGetRequest) Execute() (*LedgerAccount, *http.Response, error) {
-	return r.ApiService.V1AccountIdBalancesGetExecute(r)
-}
-
-/*
-V1AccountIdBalancesGet Get a account balances
-
-Get account balances
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiV1AccountIdBalancesGetRequest
-*/
-func (a *AccountLedgeraService) V1AccountIdBalancesGet(ctx context.Context, id string) ApiV1AccountIdBalancesGetRequest {
-	return ApiV1AccountIdBalancesGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return LedgerAccount
-func (a *AccountLedgeraService) V1AccountIdBalancesGetExecute(r ApiV1AccountIdBalancesGetRequest) (*LedgerAccount, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *LedgerAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1AccountIdBalancesGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/account/{id}/balances"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExceptionEntityNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV1AccountIdGetRequest struct {
-	ctx context.Context
-	ApiService *AccountLedgeraService
-	id string
-}
-
-func (r ApiV1AccountIdGetRequest) Execute() (*HelperPaginatedLedgerBalance, *http.Response, error) {
-	return r.ApiService.V1AccountIdGetExecute(r)
-}
-
-/*
-V1AccountIdGet Get a account from id
-
-Get account account
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id Account ID
- @return ApiV1AccountIdGetRequest
-*/
-func (a *AccountLedgeraService) V1AccountIdGet(ctx context.Context, id string) ApiV1AccountIdGetRequest {
-	return ApiV1AccountIdGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return HelperPaginatedLedgerBalance
-func (a *AccountLedgeraService) V1AccountIdGetExecute(r ApiV1AccountIdGetRequest) (*HelperPaginatedLedgerBalance, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *HelperPaginatedLedgerBalance
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1AccountIdGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/account/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExceptionEntityNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV1AccountIdJournalGetRequest struct {
-	ctx context.Context
-	ApiService *AccountLedgeraService
-	id string
-}
-
-func (r ApiV1AccountIdJournalGetRequest) Execute() (*HelperPaginatedLedgerJournalEntry, *http.Response, error) {
-	return r.ApiService.V1AccountIdJournalGetExecute(r)
-}
-
-/*
-V1AccountIdJournalGet Get a account journal
-
-Get account journal
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id
- @return ApiV1AccountIdJournalGetRequest
-*/
-func (a *AccountLedgeraService) V1AccountIdJournalGet(ctx context.Context, id string) ApiV1AccountIdJournalGetRequest {
-	return ApiV1AccountIdJournalGetRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
-}
-
-// Execute executes the request
-//  @return HelperPaginatedLedgerJournalEntry
-func (a *AccountLedgeraService) V1AccountIdJournalGetExecute(r ApiV1AccountIdJournalGetRequest) (*HelperPaginatedLedgerJournalEntry, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *HelperPaginatedLedgerJournalEntry
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1AccountIdJournalGet")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/account/{id}/journal"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExceptionEntityNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiV1AccountPostRequest struct {
-	ctx context.Context
-	ApiService *AccountLedgeraService
-	account *HttpRegisterAccount
-}
-
-// Account JSON
-func (r ApiV1AccountPostRequest) Account(account HttpRegisterAccount) ApiV1AccountPostRequest {
-	r.account = &account
-	return r
-}
-
-func (r ApiV1AccountPostRequest) Execute() (*LedgerAccount, *http.Response, error) {
-	return r.ApiService.V1AccountPostExecute(r)
-}
-
-/*
-V1AccountPost Create a account
-
-Create account
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV1AccountPostRequest
-*/
-func (a *AccountLedgeraService) V1AccountPost(ctx context.Context) ApiV1AccountPostRequest {
-	return ApiV1AccountPostRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-// Execute executes the request
-//  @return LedgerAccount
-func (a *AccountLedgeraService) V1AccountPostExecute(r ApiV1AccountPostRequest) (*LedgerAccount, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *LedgerAccount
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1AccountPost")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/v1/account"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.account == nil {
-		return localVarReturnValue, nil, reportError("account is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.account
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExceptionEntityNotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 422 {
 			var v HttpHttpUnprocessableEntity
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -605,46 +370,46 @@ func (a *AccountLedgeraService) V1AccountPostExecute(r ApiV1AccountPostRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiV1CurrencyGetRequest struct {
+type ApiV1BillingGetRequest struct {
 	ctx context.Context
-	ApiService *AccountLedgeraService
+	ApiService *BillingPlanLedgeraService
 }
 
-func (r ApiV1CurrencyGetRequest) Execute() (*HelperPaginatedArrayLedgerCurrency, *http.Response, error) {
-	return r.ApiService.V1CurrencyGetExecute(r)
+func (r ApiV1BillingGetRequest) Execute() ([]BillingBillingPlan, *http.Response, error) {
+	return r.ApiService.V1BillingGetExecute(r)
 }
 
 /*
-V1CurrencyGet Get a ledger currencies
+V1BillingGet List billing
 
-Get ledger currencies
+List billing
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiV1CurrencyGetRequest
+ @return ApiV1BillingGetRequest
 */
-func (a *AccountLedgeraService) V1CurrencyGet(ctx context.Context) ApiV1CurrencyGetRequest {
-	return ApiV1CurrencyGetRequest{
+func (a *BillingPlanLedgeraService) V1BillingGet(ctx context.Context) ApiV1BillingGetRequest {
+	return ApiV1BillingGetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return HelperPaginatedArrayLedgerCurrency
-func (a *AccountLedgeraService) V1CurrencyGetExecute(r ApiV1CurrencyGetRequest) (*HelperPaginatedArrayLedgerCurrency, *http.Response, error) {
+//  @return []BillingBillingPlan
+func (a *BillingPlanLedgeraService) V1BillingGetExecute(r ApiV1BillingGetRequest) ([]BillingBillingPlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *HelperPaginatedArrayLedgerCurrency
+		localVarReturnValue  []BillingBillingPlan
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountLedgeraService.V1CurrencyGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingPlanLedgeraService.V1BillingGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/v1/currency"
+	localVarPath := localBasePath + "/v1/billing"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -688,6 +453,127 @@ func (a *AccountLedgeraService) V1CurrencyGetExecute(r ApiV1CurrencyGetRequest) 
 		newErr := &GenericOpenAPIError{
 			body:  localVarBody,
 			error: localVarHTTPResponse.Status,
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiV1BillingPostRequest struct {
+	ctx context.Context
+	ApiService *BillingPlanLedgeraService
+	currency *BillingCreateBilling
+}
+
+// Billing JSON
+func (r ApiV1BillingPostRequest) Currency(currency BillingCreateBilling) ApiV1BillingPostRequest {
+	r.currency = &currency
+	return r
+}
+
+func (r ApiV1BillingPostRequest) Execute() (*BillingBillingPlan, *http.Response, error) {
+	return r.ApiService.V1BillingPostExecute(r)
+}
+
+/*
+V1BillingPost Create billing plan
+
+Create billing plan
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ApiV1BillingPostRequest
+*/
+func (a *BillingPlanLedgeraService) V1BillingPost(ctx context.Context) ApiV1BillingPostRequest {
+	return ApiV1BillingPostRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+// Execute executes the request
+//  @return BillingBillingPlan
+func (a *BillingPlanLedgeraService) V1BillingPostExecute(r ApiV1BillingPostRequest) (*BillingBillingPlan, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodPost
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *BillingBillingPlan
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BillingPlanLedgeraService.V1BillingPost")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/billing"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.currency == nil {
+		return localVarReturnValue, nil, reportError("currency is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.currency
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 422 {
+			var v HttpHttpUnprocessableEntity
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

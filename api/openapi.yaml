@@ -1,44 +1,50 @@
-openapi: 3.0.2
+openapi: 3.0.1
 info:
-  title: API ledgera
-  version: "1.0"
+  contact: {}
+  description: teste
+  title: Ledgera API
+  version: "2"
 servers:
-- url: https://api.ledgera.io/v1
+- url: /
 paths:
   /transaction:
-    get:
-      description: ""
-      parameters: []
+    post:
+      description: Create transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger.TransactionParams'
+        description: Transaction JSON
+        required: true
       responses:
-        "200":
-          description: OK
-        "404":
+        "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/notFound'
-          description: Not found
-      tags:
-      - transaction
-    post:
-      description: ""
-      parameters: []
-      responses:
-        "200":
-          description: OK
+                $ref: '#/components/schemas/ledger.TransactionProcessed'
+          description: Created
         "409":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/conflict'
-          description: Conflict
+                $ref: '#/components/schemas/http.HttpConflict'
+          description: conflict error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create transaction
       tags:
       - transaction
-  /v1/account/{id}/journal:
+      x-codegen-request-body-name: transaction
+  /transaction/{id}:
     get:
+      description: Get transaction
       parameters:
-      - description: account ID
-        example: 684936a4-f1f5-48ed-9378-ca9e31cf76a7
+      - description: Transaction ID
         explode: false
         in: path
         name: id
@@ -46,378 +52,1266 @@ paths:
         schema:
           type: string
         style: simple
-      - example: 1
-        explode: true
-        in: query
-        name: limit
-        required: false
-        schema:
-          type: integer
-        style: form
-      - example: MjAyMy0wMy0wMiAxNzowMzozOS4zOTU3NzYrMDAwMzdlOTk4NS05ZmM0LTQwMDgtOWFjMy04YmE4NzA4MTViYjE=
-        explode: true
-        in: query
-        name: cursor
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: 2023-03-13T21:33:07.202Z
-        explode: true
-        in: query
-        name: date_from
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: 2023-03-13T21:33:07.202Z
-        explode: true
-        in: query
-        name: date_to
-        required: false
-        schema:
-          type: string
-        style: form
-      - example: DEBIT
-        explode: true
-        in: query
-        name: entry_type
-        required: false
-        schema:
-          enum:
-          - DEBIT
-          - CREDIT
-          type: string
-        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/_v1_account__id__journal_get_200_response'
-          description: Ok
-      tags:
-      - account
-  /account:
-    get:
-      description: ""
-      parameters: []
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/account'
+                $ref: '#/components/schemas/ledger.Transaction'
           description: OK
         "404":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/notFound'
-          description: Not found
+                $ref: '#/components/schemas/http.HttpNotFound'
+          description: Transaction not found
+      summary: Get transaction
       tags:
-      - account
+      - transaction
+  /transaction/raw:
     post:
-      description: ""
-      parameters: []
+      description: Create raw transaction
       requestBody:
         content:
-          'application/json:':
+          application/json:
             schema:
-              $ref: '#/components/schemas/_account_post_request'
+              $ref: '#/components/schemas/ledger.TransactionParams'
+        description: Transaction JSON
+        required: true
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/account'
+                $ref: '#/components/schemas/ledger.TransactionProcessed'
           description: Created
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpConflict'
+          description: conflict error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create raw transaction
+      tags:
+      - transaction
+      x-codegen-request-body-name: transaction
+  /transaction/rule:
+    get:
+      description: List transaction rule
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ledger.TransactionRule'
+                type: array
+          description: OK
+      summary: List transaction rule
+      tags:
+      - transaction-rule
+    post:
+      description: Create transaction rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger.TransactionRuleParams'
+        description: Transaction rule JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.TransactionRule'
+          description: Created
+      summary: Create transaction rule
+      tags:
+      - transaction-rule
+      x-codegen-request-body-name: transaction
+  /transaction/rule/bulk:
+    post:
+      description: Create transaction rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/ledger.TransactionRule'
+              type: array
+        description: Transaction rule JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ledger.TransactionRule'
+                type: array
+          description: Created
+      summary: Create transaction rule
+      tags:
+      - transaction-rule
+      x-codegen-request-body-name: transaction
+  /v1/account:
+    post:
+      description: Create account
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/http.RegisterAccount'
+        description: Account JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.Account'
+          description: Created
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account plan not found
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create a account
       tags:
       - account
+      x-codegen-request-body-name: account
+  /v1/account-plan:
+    get:
+      description: List account plan
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/account_plan.AccountPlan'
+                type: array
+          description: OK
+      summary: List account plan
+      tags:
+      - account-plan
+    post:
+      description: Create account plan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/account_plan.CreateAccountPlan'
+        description: Account plan JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_plan.AccountPlan'
+          description: Created
+      summary: Create account plan
+      tags:
+      - account-plan
+      x-codegen-request-body-name: plan
+  /v1/account-plan/{id}:
+    delete:
+      description: Delete account plan
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_plan.AccountPlan'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account plan not found
+      summary: Delete account plan
+      tags:
+      - account-plan
+    get:
+      description: Get account plan
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_plan.AccountPlan'
+          description: OK
+      summary: Get account plan
+      tags:
+      - account-plan
+    put:
+      description: Update account plan
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/account_plan.AccountPlan'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account plan not found
+      summary: Update account plan
+      tags:
+      - account-plan
+  /v1/account-plan/bulk:
+    post:
+      description: Bulk create account plan
+      parameters:
+      - explode: true
+        in: query
+        name: id
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.BulkCreateAccountPlan'
+          description: Created
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Bulk create account plan
+      tags:
+      - account-plan
+  /v1/account/{id}:
+    get:
+      description: Get account account
+      parameters:
+      - description: Account ID
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/helper.Paginated-ledger_Balance'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account not found
+      summary: Get a account from id
+      tags:
+      - account
+  /v1/account/{id}/balances:
+    get:
+      description: Get account balances
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.Account'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account not found
+      summary: Get a account balances
+      tags:
+      - account
+  /v1/account/{id}/journal:
+    get:
+      description: Get account journal
+      parameters:
+      - explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/helper.Paginated-ledger_JournalEntry'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: account not found
+      summary: Get a account journal
+      tags:
+      - account
+  /v1/billing:
+    get:
+      description: List billing
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/billing.BillingPlan'
+                type: array
+          description: OK
+      summary: List billing
+      tags:
+      - billing-plan
+    post:
+      description: Create billing plan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.CreateBilling'
+        description: Billing JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.BillingPlan'
+          description: Created
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create billing plan
+      tags:
+      - billing-plan
+      x-codegen-request-body-name: currency
+  /v1/billing/{billingPlanId}:
+    get:
+      description: Get billing plan by ID
+      parameters:
+      - description: Billing ID JSON
+        explode: false
+        in: path
+        name: billingPlanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.BillingPlan'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: billing plan not found
+      summary: Get billing plan by ID
+      tags:
+      - billing-plan
+    put:
+      description: Update billing plan
+      parameters:
+      - description: Billing plan ID
+        explode: false
+        in: path
+        name: billingPlanId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/billing.BillingPlan'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception.EntityNotFound'
+          description: billing plan not found
+      summary: Update billing plan
+      tags:
+      - billing-plan
+  /v1/billing/bulk:
+    post:
+      description: Create billing plan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/billing.CreateBulkBilling'
+        description: Billing JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/billing.BillingPlan'
+                type: array
+          description: Created
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create billing plan
+      tags:
+      - billing-plan
+      x-codegen-request-body-name: currency
+  /v1/currency:
+    get:
+      description: Get ledger currencies
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/helper.Paginated-array_ledger_Currency'
+          description: OK
+      summary: Get a ledger currencies
+      tags:
+      - account
+    post:
+      description: Get ledger currencies
+      operationId: teste
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/http.CurrencyParams'
+        description: Currency JSON
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.Currency'
+          description: OK
+      summary: Get a ledger currencies
+      tags:
+      - account
+      x-codegen-request-body-name: currency
 components:
   schemas:
-    conflict:
+    account_plan.AccountPlan:
+      example:
+        createdAt: createdAt
+        deletedAt: deletedAt
+        balanceType: null
+        isUnique: true
+        subType: subType
+        id: id
+        balanceValidation: null
+        type: type
       properties:
-        transactionType:
+        balanceType:
+          $ref: '#/components/schemas/account_plan.BalanceType'
+        balanceValidation:
+          $ref: '#/components/schemas/account_plan.BalanceValidation'
+        createdAt:
           type: string
-        transactionProcess:
+        deletedAt:
           type: string
-        expectedAmount:
+        id:
           type: string
-        accountId:
+        isUnique:
+          type: boolean
+        subType:
+          type: string
+        type:
           type: string
       type: object
-    unprocessableEntity:
+    account_plan.BalanceType:
+      enum:
+      - available
+      - blocked
+      - pending
+      type: string
+      x-enum-varnames:
+      - BalanceTypeAvailable
+      - BalanceTypeBlocked
+      - BalanceTypePending
+    account_plan.BalanceValidation:
+      enum:
+      - positive
+      - negative
+      - notValidated
+      type: string
+      x-enum-varnames:
+      - BalanceValidationPositive
+      - BalanceValidationNegative
+      - BalanceValidationNoValidation
+    account_plan.CreateAccountPlan:
+      example:
+        balanceType: null
+        isUnique: true
+        subType: subType
+        balanceValidation: balanceValidation
+        type: type
       properties:
-        message:
+        balanceType:
+          $ref: '#/components/schemas/account_plan.BalanceType'
+        balanceValidation:
           type: string
-        errors:
+        isUnique:
+          type: boolean
+        subType:
+          type: string
+        type:
+          type: string
+      required:
+      - balanceType
+      - balanceValidation
+      - subType
+      - type
+      type: object
+    billing.BillingPlan:
+      example:
+        createdAt: createdAt
+        deletedAt: deletedAt
+        metadata:
+          transactions:
+          - transactionType: transactionType
+            entryType: entryType
+            amount: 0.8008281904610115
+            type: null
+          - transactionType: transactionType
+            entryType: entryType
+            amount: 0.8008281904610115
+            type: null
+        name: name
+        description: description
+        expiration: expiration
+        id: id
+        is_default: true
+        status: null
+      properties:
+        createdAt:
+          type: string
+        deletedAt:
+          type: string
+        description:
+          type: string
+        expiration:
+          type: string
+        id:
+          type: string
+        is_default:
+          type: boolean
+        metadata:
+          $ref: '#/components/schemas/billing.BillingPlanMetadata'
+        name:
+          type: string
+        status:
+          $ref: '#/components/schemas/billing.BillingPlanStatus'
+      type: object
+    billing.BillingPlanMetadata:
+      example:
+        transactions:
+        - transactionType: transactionType
+          entryType: entryType
+          amount: 0.8008281904610115
+          type: null
+        - transactionType: transactionType
+          entryType: entryType
+          amount: 0.8008281904610115
+          type: null
+      properties:
+        transactions:
           items:
-            $ref: '#/components/schemas/validationError'
+            $ref: '#/components/schemas/billing.BillingTransaction'
           type: array
       type: object
-    validationError:
+    billing.BillingPlanStatus:
+      enum:
+      - ACTIVE
+      - INACTIVE
+      type: string
+      x-enum-varnames:
+      - BillingPlanActive
+      - BillingPlanInactive
+    billing.BillingTransaction:
+      example:
+        transactionType: transactionType
+        entryType: entryType
+        amount: 0.8008281904610115
+        type: null
       properties:
-        field:
+        amount:
+          type: number
+        entryType:
           type: string
-        value:
+        transactionType:
           type: string
+        type:
+          $ref: '#/components/schemas/billing.BillingTransactionAmountType'
+      type: object
+    billing.BillingTransactionAmountType:
+      enum:
+      - VALUE
+      - PERCENTAGE
+      type: string
+      x-enum-varnames:
+      - AmountTypeValue
+      - AmountTypePercentage
+    billing.CreateBilling:
+      properties:
+        description:
+          type: string
+        entries:
+          items:
+            $ref: '#/components/schemas/billing.TransactionEntry'
+          type: array
+        expiration:
+          type: string
+        isDefault:
+          type: boolean
+        name:
+          type: string
+      required:
+      - entries
+      - expiration
+      - name
+      type: object
+    billing.CreateBulkBilling:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/billing.CreateBilling'
+          type: array
+      required:
+      - data
+      type: object
+    billing.TransactionEntry:
+      properties:
+        amount:
+          type: string
+        amountType:
+          $ref: '#/components/schemas/billing.BillingTransactionAmountType'
+        entryType:
+          type: string
+        transactionType:
+          type: string
+      type: object
+    exception.EntityNotFound:
+      properties:
+        entity:
+          type: string
+        id:
+          type: string
+      type: object
+    exception.ValidationDetails:
+      properties:
         constraint:
           type: string
         description:
           type: string
-        code:
+        field:
+          type: string
+        value:
           type: string
       type: object
-    notFound:
+    helper.Paginated-array_ledger_Currency:
+      example:
+        metadata:
+          key: metadata
+        data:
+        - createdAt: createdAt
+          code: code
+          name: name
+        - createdAt: createdAt
+          code: code
+          name: name
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ledger.Currency'
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    helper.Paginated-ledger_Balance:
+      example:
+        metadata:
+          key: metadata
+        data:
+          accountId: accountId
+          createdAt: createdAt
+          amount: 0.8008281904610115
+          seqNum: 6
+          currency: currency
+          type: type
+          updatedAt: updatedAt
+      properties:
+        data:
+          $ref: '#/components/schemas/ledger.Balance'
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    helper.Paginated-ledger_JournalEntry:
+      example:
+        metadata:
+          key: metadata
+        data:
+          amount: 0.8008281904610115
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 1
+          accountSubType: accountSubType
+          seqNum: 5
+          accountType: accountType
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: balanceType
+          conciliationId: conciliationId
+          settledAt: settledAt
+          balanceAfter: 6.027456183070403
+          currency: currency
+          id: id
+          processType: processType
+      properties:
+        data:
+          $ref: '#/components/schemas/ledger.JournalEntry'
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
+    http.BulkCreateAccountPlan:
+      example:
+        data:
+        - balanceType: null
+          isUnique: true
+          subType: subType
+          balanceValidation: balanceValidation
+          type: type
+        - balanceType: null
+          isUnique: true
+          subType: subType
+          balanceValidation: balanceValidation
+          type: type
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/account_plan.CreateAccountPlan'
+          type: array
+      required:
+      - data
+      type: object
+    http.ConflictData:
+      properties:
+        accountId:
+          type: string
+        code:
+          type: string
+        expectedAmount:
+          type: string
+        transactionId:
+          type: string
+        transactionProcess:
+          type: string
+        transactionType:
+          type: string
+      type: object
+    http.CurrencyParams:
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+      required:
+      - code
+      - name
+      type: object
+    http.HttpConflict:
+      properties:
+        data:
+          $ref: '#/components/schemas/http.ConflictData'
+        message:
+          type: string
+      type: object
+    http.HttpNotFound:
       properties:
         message:
           type: string
         resource:
           type: string
       type: object
-    accountType:
-      enum:
-      - liability
-      - asset
-      type: string
-    balanceType:
-      enum:
-      - available
-      - blocked
-      - pending
-      type: string
-    statement:
+    http.HttpUnprocessableEntity:
+      properties:
+        errors:
+          items:
+            $ref: '#/components/schemas/exception.ValidationDetails'
+          type: array
+        message:
+          type: string
+      type: object
+    http.QueryAccountPlan:
+      properties:
+        id:
+          type: string
+      required:
+      - id
+      type: object
+    http.RegisterAccount:
+      properties:
+        currencies:
+          items:
+            type: string
+          minItems: 1
+          type: array
+        subType:
+          type: string
+        type:
+          type: string
+      required:
+      - currencies
+      - subType
+      - type
+      type: object
+    ledger.Account:
       example:
-        amount: amount
+        createdAt: createdAt
+        balances:
+        - accountId: accountId
+          createdAt: createdAt
+          amount: 0.8008281904610115
+          seqNum: 6
+          currency: currency
+          type: type
+          updatedAt: updatedAt
+        - accountId: accountId
+          createdAt: createdAt
+          amount: 0.8008281904610115
+          seqNum: 6
+          currency: currency
+          type: type
+          updatedAt: updatedAt
+        subType: subType
+        billingPlanId: billingPlanId
+        id: id
+        type: type
+      properties:
+        balances:
+          items:
+            $ref: '#/components/schemas/ledger.Balance'
+          type: array
+        billingPlanId:
+          type: string
+        createdAt:
+          type: string
+        id:
+          type: string
+        subType:
+          type: string
+        type:
+          type: string
+      type: object
+    ledger.Balance:
+      example:
+        accountId: accountId
+        createdAt: createdAt
+        amount: 0.8008281904610115
+        seqNum: 6
+        currency: currency
+        type: type
+        updatedAt: updatedAt
+      properties:
+        accountId:
+          type: string
+        amount:
+          type: number
+        createdAt:
+          type: string
+        currency:
+          type: string
+        seqNum:
+          type: integer
+        type:
+          type: string
+        updatedAt:
+          type: string
+      required:
+      - accountId
+      - amount
+      - currency
+      - seqNum
+      - type
+      type: object
+    ledger.Currency:
+      example:
+        createdAt: createdAt
+        code: code
+        name: name
+      properties:
+        code:
+          type: string
+        createdAt:
+          type: string
+        name:
+          type: string
+      type: object
+    ledger.JournalEntry:
+      example:
+        amount: 0.8008281904610115
         metadata: "{}"
         entryLabel: entryLabel
-        entryOrder: 5
-        seqNum: 1
-        accountType: null
+        entryOrder: 1
+        accountSubType: accountSubType
+        seqNum: 5
+        accountType: accountType
         transactionId: transactionId
         entryId: entryId
         transactionType: transactionType
         accountId: accountId
         createdAt: createdAt
-        balanceType: null
+        balanceType: balanceType
         conciliationId: conciliationId
         settledAt: settledAt
+        balanceAfter: 6.027456183070403
         currency: currency
-        balanceAfter: balanceAfter
-        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        id: id
         processType: processType
-        accountLabel: accountLabel
       properties:
-        id:
-          format: uuid
+        accountId:
           type: string
-        seqNum:
-          type: integer
-        transactionId:
-          type: string
-        entryId:
-          type: string
-        accountLabel:
+        accountSubType:
           type: string
         accountType:
-          $ref: '#/components/schemas/accountType'
-        accountId:
+          type: string
+        amount:
+          type: number
+        balanceAfter:
+          type: number
+        balanceType:
+          type: string
+        conciliationId:
+          type: string
+        createdAt:
+          type: string
+        currency:
+          type: string
+        entryId:
           type: string
         entryLabel:
           type: string
         entryOrder:
-          format: int32
           type: integer
-        balanceType:
-          $ref: '#/components/schemas/balanceType'
-        currency:
-          maxLength: 3
-          type: string
-        amount:
-          type: string
-        conciliationId:
-          type: string
-        transactionType:
-          type: string
-        processType:
+        id:
           type: string
         metadata:
-          properties: {}
           type: object
-        balanceAfter:
-          type: string
-        createdAt:
-          type: string
-        settledAt:
-          format: nullable
-          type: string
-      type: object
-    metadata:
-      example:
-        nextCursor: nextCursor
-        count: 0.8008281904610115
-        limit: 6.027456183070403
-        currentCursor: currentCursor
-      properties:
-        count:
-          type: number
-        limit:
-          type: number
-        currentCursor:
-          type: string
-        nextCursor:
-          type: string
-      type: object
-    balance:
-      example:
-        accountId: accountId
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        amount: amount
-        seqNum: 0
-        currency: currency
-        type: type
-        updatedAt: 2000-01-23T04:56:07.000+00:00
-      properties:
-        accountId:
-          type: string
-        type:
-          type: string
-        currency:
+        processType:
           type: string
         seqNum:
           type: integer
-        amount:
+        settledAt:
           type: string
-        createdAt:
-          format: date-time
+        transactionId:
           type: string
-        updatedAt:
-          format: date-time
-          type: string
-      type: object
-    account:
-      example:
-        createdAt: 2000-01-23T04:56:07.000+00:00
-        balances:
-        - accountId: accountId
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          amount: amount
-          seqNum: 0
-          currency: currency
-          type: type
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        - accountId: accountId
-          createdAt: 2000-01-23T04:56:07.000+00:00
-          amount: amount
-          seqNum: 0
-          currency: currency
-          type: type
-          updatedAt: 2000-01-23T04:56:07.000+00:00
-        id: id
-        label: label
-        type: type
-      properties:
-        id:
-          type: string
-        type:
-          type: string
-        label:
-          type: string
-        balances:
-          items:
-            $ref: '#/components/schemas/balance'
-          type: array
-        createdAt:
-          format: date-time
-          type: string
-      type: object
-    transactionEntry:
-      properties:
         transactionType:
           type: string
-        entryType:
+      type: object
+    ledger.MessageType:
+      enum:
+      - single
+      - dual
+      type: string
+      x-enum-varnames:
+      - MessageTypeSingle
+      - MessageTypeDual
+    ledger.ProcessType:
+      enum:
+      - execution
+      - authorization
+      - confirmation
+      - reversal
+      type: string
+      x-enum-varnames:
+      - ProcessTypeExecution
+      - ProcessTypeAuthorization
+      - ProcessTypeConfirmation
+      - ProcessTypeReversal
+    ledger.Transaction:
+      example:
+        transactionType: transactionType
+        createdAt: createdAt
+        metadata: "{}"
+        conciliationId: conciliationId
+        id: id
+      properties:
+        conciliationId:
+          type: string
+        createdAt:
+          type: string
+        id:
+          type: string
+        metadata:
+          type: object
+        transactionType:
+          type: string
+      type: object
+    ledger.TransactionParams:
+      properties:
+        amount:
+          type: string
+        currency:
+          type: string
+        metadata:
+          type: object
+        paramAccount1:
+          type: string
+        paramAccount2:
+          type: string
+        transactionId:
+          type: string
+        transactionProcess:
+          type: string
+        transactionType:
           type: string
       required:
-      - entryType
+      - amount
+      - currency
+      - transactionId
+      - transactionProcess
       - transactionType
       type: object
-    billingPlan:
+    ledger.TransactionProcessed:
+      example:
+        createdAt: createdAt
+        entries:
+        - amount: 0.8008281904610115
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 1
+          accountSubType: accountSubType
+          seqNum: 5
+          accountType: accountType
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: balanceType
+          conciliationId: conciliationId
+          settledAt: settledAt
+          balanceAfter: 6.027456183070403
+          currency: currency
+          id: id
+          processType: processType
+        - amount: 0.8008281904610115
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 1
+          accountSubType: accountSubType
+          seqNum: 5
+          accountType: accountType
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: balanceType
+          conciliationId: conciliationId
+          settledAt: settledAt
+          balanceAfter: 6.027456183070403
+          currency: currency
+          id: id
+          processType: processType
+        metadata: "{}"
+        id: id
       properties:
+        createdAt:
+          type: string
+        entries:
+          items:
+            $ref: '#/components/schemas/ledger.JournalEntry'
+          type: array
         id:
           type: string
-        name:
+        metadata:
+          type: object
+      type: object
+    ledger.TransactionRule:
+      example:
+        entryType: entryType
+        debitAccountType: debitAccountType
+        paramAccount2Type: paramAccount2Type
+        creditAccountBalanceType: creditAccountBalanceType
+        entryOrder: 0
+        paramAccount1Type: paramAccount1Type
+        creditAccountType: creditAccountType
+        debitAccountBalanceType: debitAccountBalanceType
+        transactionType: transactionType
+        createdAt: createdAt
+        messageType: null
+        paramAccount1Subtype: paramAccount1Subtype
+        creditAccountSubtype: creditAccountSubtype
+        paramAccount2Subtype: paramAccount2Subtype
+        processType: null
+        debitAccountSubtype: debitAccountSubtype
+      properties:
+        createdAt:
           type: string
-        transactionType:
+        creditAccountBalanceType:
           type: string
+        creditAccountSubtype:
+          type: string
+        creditAccountType:
+          type: string
+        debitAccountBalanceType:
+          type: string
+        debitAccountSubtype:
+          type: string
+        debitAccountType:
+          type: string
+        entryOrder:
+          type: integer
         entryType:
           type: string
-        amountType:
+        messageType:
+          $ref: '#/components/schemas/ledger.MessageType'
+        paramAccount1Subtype:
           type: string
-        amount:
+        paramAccount1Type:
+          type: string
+        paramAccount2Subtype:
+          type: string
+        paramAccount2Type:
+          type: string
+        processType:
+          $ref: '#/components/schemas/ledger.ProcessType'
+        transactionType:
           type: string
       type: object
-    _v1_account__id__journal_get_200_response:
-      example:
-        metadata:
-          nextCursor: nextCursor
-          count: 0.8008281904610115
-          limit: 6.027456183070403
-          currentCursor: currentCursor
-        data:
-        - amount: amount
-          metadata: "{}"
-          entryLabel: entryLabel
-          entryOrder: 5
-          seqNum: 1
-          accountType: null
-          transactionId: transactionId
-          entryId: entryId
-          transactionType: transactionType
-          accountId: accountId
-          createdAt: createdAt
-          balanceType: null
-          conciliationId: conciliationId
-          settledAt: settledAt
-          currency: currency
-          balanceAfter: balanceAfter
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          processType: processType
-          accountLabel: accountLabel
-        - amount: amount
-          metadata: "{}"
-          entryLabel: entryLabel
-          entryOrder: 5
-          seqNum: 1
-          accountType: null
-          transactionId: transactionId
-          entryId: entryId
-          transactionType: transactionType
-          accountId: accountId
-          createdAt: createdAt
-          balanceType: null
-          conciliationId: conciliationId
-          settledAt: settledAt
-          currency: currency
-          balanceAfter: balanceAfter
-          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-          processType: processType
-          accountLabel: accountLabel
+    ledger.TransactionRuleParams:
       properties:
-        metadata:
-          $ref: '#/components/schemas/metadata'
-        data:
-          items:
-            $ref: '#/components/schemas/statement'
-          type: array
-      type: object
-    _account_post_request:
-      properties:
-        type:
-          $ref: '#/components/schemas/accountType'
-        label:
+        creditAccountBalanceType:
+          type: string
+        creditAccountSubType:
+          type: string
+        creditAccountType:
+          type: string
+        debitAccountBalanceType:
+          type: string
+        debitAccountSubType:
+          type: string
+        debitAccountType:
+          type: string
+        entryOrder:
+          type: integer
+        entryType:
+          type: string
+        messageType:
+          $ref: '#/components/schemas/ledger.MessageType'
+        paramAccount1Subtype:
+          type: string
+        paramAccount1Type:
+          type: string
+        paramAccount2Subtype:
+          type: string
+        paramAccount2Type:
+          type: string
+        processType:
+          $ref: '#/components/schemas/ledger.ProcessType'
+        transactionType:
           type: string
       required:
-      - label
-      - type
+      - creditAccountBalanceType
+      - creditAccountSubType
+      - creditAccountType
+      - debitAccountBalanceType
+      - debitAccountSubType
+      - debitAccountType
+      - entryOrder
+      - entryType
+      - messageType
+      - processType
+      - transactionType
       type: object
