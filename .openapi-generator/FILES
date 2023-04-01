@@ -27,8 +27,8 @@ docs/BillingTransactionEntry.md
 docs/ExceptionEntityNotFound.md
 docs/ExceptionValidationDetails.md
 docs/HelperPaginatedArrayLedgerCurrency.md
+docs/HelperPaginatedArrayLedgerJournalEntry.md
 docs/HelperPaginatedLedgerAccount.md
-docs/HelperPaginatedLedgerJournalEntry.md
 docs/HttpBulkCreateAccountPlan.md
 docs/HttpConflictData.md
 docs/HttpCurrencyParams.md
@@ -68,8 +68,8 @@ model_billing_transaction_entry.go
 model_exception_entity_not_found.go
 model_exception_validation_details.go
 model_helper_paginated_array_ledger_currency.go
+model_helper_paginated_array_ledger_journal_entry.go
 model_helper_paginated_ledger_account.go
-model_helper_paginated_ledger_journal_entry.go
 model_http_bulk_create_account_plan.go
 model_http_conflict_data.go
 model_http_currency_params.go

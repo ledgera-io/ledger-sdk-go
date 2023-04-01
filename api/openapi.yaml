@@ -1,10 +1,12 @@
 openapi: 3.0.1
 info:
   contact: {}
-  title: Ledgera
+  description: Ledgera servers.
+  termsOfService: https://ledgera.io/terms
+  title: Ledgera core API
   version: "2.0"
 servers:
-- url: /
+- url: https://api.ledgera/
 paths:
   /transaction:
     post:
@@ -44,13 +46,11 @@ paths:
       description: Get transaction
       parameters:
       - description: Transaction ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -233,13 +233,11 @@ paths:
       description: Delete account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -260,13 +258,11 @@ paths:
       description: Get account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -281,13 +277,11 @@ paths:
       description: Update account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -308,13 +302,11 @@ paths:
     post:
       description: Bulk create account plan
       parameters:
-      - explode: true
-        in: query
+      - in: query
         name: id
         required: true
         schema:
           type: string
-        style: form
       responses:
         "201":
           content:
@@ -336,13 +328,11 @@ paths:
       description: Get account account
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -364,13 +354,11 @@ paths:
       description: Get account balances
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -392,38 +380,25 @@ paths:
       description: Get account journal
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
-      - explode: true
-        in: query
+      - in: query
         name: cursor
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: date_from
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: date_to
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: type
-        required: false
         schema:
           enum:
           - DEBIT
@@ -432,23 +407,19 @@ paths:
           x-enum-varnames:
           - JournalQueryTypeDebit
           - JournalQueryTypeCredit
-        style: form
         x-enum-varnames:
         - JournalQueryTypeDebit
         - JournalQueryTypeCredit
-      - explode: true
-        in: query
+      - in: query
         name: limit
-        required: false
         schema:
           type: integer
-        style: form
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/helper.Paginated-ledger_JournalEntry'
+                $ref: '#/components/schemas/helper.Paginated-array_ledger_JournalEntry'
           description: OK
         "404":
           content:
@@ -505,13 +476,11 @@ paths:
       description: Get billing plan by ID
       parameters:
       - description: Billing plan ID
-        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -532,13 +501,11 @@ paths:
       description: Update billing plan
       parameters:
       - description: Billing plan ID
-        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -858,6 +825,59 @@ components:
             type: string
           type: object
       type: object
+    helper.Paginated-array_ledger_JournalEntry:
+      example:
+        metadata:
+          key: metadata
+        data:
+        - amount: 0.8008281904610115
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 1
+          accountSubType: accountSubType
+          seqNum: 5
+          accountType: accountType
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: balanceType
+          conciliationId: conciliationId
+          settledAt: settledAt
+          balanceAfter: 6.027456183070403
+          currency: currency
+          id: id
+          processType: processType
+        - amount: 0.8008281904610115
+          metadata: "{}"
+          entryLabel: entryLabel
+          entryOrder: 1
+          accountSubType: accountSubType
+          seqNum: 5
+          accountType: accountType
+          transactionId: transactionId
+          entryId: entryId
+          transactionType: transactionType
+          accountId: accountId
+          createdAt: createdAt
+          balanceType: balanceType
+          conciliationId: conciliationId
+          settledAt: settledAt
+          balanceAfter: 6.027456183070403
+          currency: currency
+          id: id
+          processType: processType
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/ledger.JournalEntry'
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          type: object
+      type: object
     helper.Paginated-ledger_Account:
       example:
         metadata:
@@ -886,38 +906,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ledger.Account'
-        metadata:
-          additionalProperties:
-            type: string
-          type: object
-      type: object
-    helper.Paginated-ledger_JournalEntry:
-      example:
-        metadata:
-          key: metadata
-        data:
-          amount: 0.8008281904610115
-          metadata: "{}"
-          entryLabel: entryLabel
-          entryOrder: 1
-          accountSubType: accountSubType
-          seqNum: 5
-          accountType: accountType
-          transactionId: transactionId
-          entryId: entryId
-          transactionType: transactionType
-          accountId: accountId
-          createdAt: createdAt
-          balanceType: balanceType
-          conciliationId: conciliationId
-          settledAt: settledAt
-          balanceAfter: 6.027456183070403
-          currency: currency
-          id: id
-          processType: processType
-      properties:
-        data:
-          $ref: '#/components/schemas/ledger.JournalEntry'
         metadata:
           additionalProperties:
             type: string

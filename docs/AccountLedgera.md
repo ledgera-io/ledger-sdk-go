@@ -1,6 +1,6 @@
 # \AccountLedgera
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.ledgera*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -155,7 +155,7 @@ No authorization required
 
 ## V1AccountIdJournalGet
 
-> HelperPaginatedLedgerJournalEntry V1AccountIdJournalGet(ctx, id).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).Type_(type_).Limit(limit).Execute()
+> HelperPaginatedArrayLedgerJournalEntry V1AccountIdJournalGet(ctx, id).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).Type_(type_).Limit(limit).Execute()
 
 Get a account journal
 
@@ -188,7 +188,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdJournalGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `V1AccountIdJournalGet`: HelperPaginatedLedgerJournalEntry
+    // response from `V1AccountIdJournalGet`: HelperPaginatedArrayLedgerJournalEntry
     fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdJournalGet`: %v\n", resp)
 }
 ```
@@ -217,7 +217,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HelperPaginatedLedgerJournalEntry**](HelperPaginatedLedgerJournalEntry.md)
+[**HelperPaginatedArrayLedgerJournalEntry**](HelperPaginatedArrayLedgerJournalEntry.md)
 
 ### Authorization
 

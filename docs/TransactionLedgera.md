@@ -1,6 +1,6 @@
 # \TransactionLedgera
 
-All URIs are relative to *http://localhost*
+All URIs are relative to *https://api.ledgera*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
