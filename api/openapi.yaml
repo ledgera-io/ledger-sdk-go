@@ -1,8 +1,8 @@
 openapi: 3.0.1
 info:
   contact: {}
-  title: ledgera
-  version: v2
+  title: Ledgera
+  version: "2.0"
 servers:
 - url: /
 paths:
@@ -399,6 +399,50 @@ paths:
         schema:
           type: string
         style: simple
+      - explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: date_from
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: date_to
+        required: false
+        schema:
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: type
+        required: false
+        schema:
+          enum:
+          - DEBIT
+          - CREDIT
+          type: string
+          x-enum-varnames:
+          - JournalQueryTypeDebit
+          - JournalQueryTypeCredit
+        style: form
+        x-enum-varnames:
+        - JournalQueryTypeDebit
+        - JournalQueryTypeCredit
+      - explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          type: integer
+        style: form
       responses:
         "200":
           content:
@@ -1107,6 +1151,14 @@ components:
         transactionType:
           type: string
       type: object
+    ledger.JournalQueryType:
+      enum:
+      - DEBIT
+      - CREDIT
+      type: string
+      x-enum-varnames:
+      - JournalQueryTypeDebit
+      - JournalQueryTypeCredit
     ledger.MessageType:
       enum:
       - single

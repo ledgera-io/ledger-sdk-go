@@ -30,7 +30,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {
@@ -100,7 +100,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {
@@ -155,7 +155,7 @@ No authorization required
 
 ## V1AccountIdJournalGet
 
-> HelperPaginatedLedgerJournalEntry V1AccountIdJournalGet(ctx, id).Execute()
+> HelperPaginatedLedgerJournalEntry V1AccountIdJournalGet(ctx, id).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).Type_(type_).Limit(limit).Execute()
 
 Get a account journal
 
@@ -170,15 +170,20 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {
     id := "id_example" // string | Account ID
+    cursor := "cursor_example" // string |  (optional)
+    dateFrom := "dateFrom_example" // string |  (optional)
+    dateTo := "dateTo_example" // string |  (optional)
+    type_ := "type__example" // string |  (optional)
+    limit := int32(56) // int32 |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountLedgera.V1AccountIdJournalGet(context.Background(), id).Execute()
+    resp, r, err := apiClient.AccountLedgera.V1AccountIdJournalGet(context.Background(), id).Cursor(cursor).DateFrom(dateFrom).DateTo(dateTo).Type_(type_).Limit(limit).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdJournalGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,6 +209,11 @@ Other parameters are passed through a pointer to a apiV1AccountIdJournalGetReque
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **cursor** | **string** |  | 
+ **dateFrom** | **string** |  | 
+ **dateTo** | **string** |  | 
+ **type_** | **string** |  | 
+ **limit** | **int32** |  | 
 
 ### Return type
 
@@ -240,7 +250,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {
@@ -306,7 +316,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {
@@ -367,7 +377,7 @@ import (
     "context"
     "fmt"
     "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+    openapiclient "github.com/ledgera-io/ledger-sdk-go"
 )
 
 func main() {

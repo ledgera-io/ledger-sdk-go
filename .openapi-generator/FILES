@@ -40,6 +40,7 @@ docs/LedgerAccount.md
 docs/LedgerBalance.md
 docs/LedgerCurrency.md
 docs/LedgerJournalEntry.md
+docs/LedgerJournalQueryType.md
 docs/LedgerMessageType.md
 docs/LedgerProcessType.md
 docs/LedgerTransaction.md
@@ -80,6 +81,7 @@ model_ledger_account.go
 model_ledger_balance.go
 model_ledger_currency.go
 model_ledger_journal_entry.go
+model_ledger_journal_query_type.go
 model_ledger_message_type.go
 model_ledger_process_type.go
 model_ledger_transaction.go

@@ -1,2 +1,2 @@
 gen:
-	openapi-generator generate  --api-name-suffix ledgera -g go --additional-properties=prependFormOrBodyParameters=true -o ./ -i api/openapi.yaml --package-name sdk
+	openapi-generator generate  --api-name-suffix ledgera -g go --additional-properties=prependFormOrBodyParameters=true -o ./ -i api/openapi.yaml --package-name sdk --git-repo-id ledger-sdk-go --git-user-id ledgera-io
