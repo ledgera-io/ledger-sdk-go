@@ -4,79 +4,13 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**Teste**](AccountLedgera.md#Teste) | **Post** /v1/currency | Get a ledger currencies
 [**V1AccountIdBalancesGet**](AccountLedgera.md#V1AccountIdBalancesGet) | **Get** /v1/account/{id}/balances | Get a account balances
 [**V1AccountIdGet**](AccountLedgera.md#V1AccountIdGet) | **Get** /v1/account/{id} | Get a account from id
 [**V1AccountIdJournalGet**](AccountLedgera.md#V1AccountIdJournalGet) | **Get** /v1/account/{id}/journal | Get a account journal
 [**V1AccountPost**](AccountLedgera.md#V1AccountPost) | **Post** /v1/account | Create a account
 [**V1CurrencyGet**](AccountLedgera.md#V1CurrencyGet) | **Get** /v1/currency | Get a ledger currencies
+[**V1CurrencyPost**](AccountLedgera.md#V1CurrencyPost) | **Post** /v1/currency | Get a ledger currencies
 
-
-
-## Teste
-
-> LedgerCurrency Teste(ctx).Currency(currency).Execute()
-
-Get a ledger currencies
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
-)
-
-func main() {
-    currency := *openapiclient.NewHttpCurrencyParams("Code_example", "Name_example") // HttpCurrencyParams | Currency JSON
-
-    configuration := openapiclient.NewConfiguration()
-    apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.AccountLedgera.Teste(context.Background()).Currency(currency).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.Teste``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `Teste`: LedgerCurrency
-    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.Teste`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiTesteRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **currency** | [**HttpCurrencyParams**](HttpCurrencyParams.md) | Currency JSON | 
-
-### Return type
-
-[**LedgerCurrency**](LedgerCurrency.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## V1AccountIdBalancesGet
@@ -100,7 +34,7 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | 
+    id := "id_example" // string | Account ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -120,7 +54,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Account ID | 
 
 ### Other Parameters
 
@@ -151,7 +85,7 @@ No authorization required
 
 ## V1AccountIdGet
 
-> HelperPaginatedLedgerBalance V1AccountIdGet(ctx, id).Execute()
+> HelperPaginatedLedgerAccount V1AccountIdGet(ctx, id).Execute()
 
 Get a account from id
 
@@ -179,7 +113,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1AccountIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `V1AccountIdGet`: HelperPaginatedLedgerBalance
+    // response from `V1AccountIdGet`: HelperPaginatedLedgerAccount
     fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1AccountIdGet`: %v\n", resp)
 }
 ```
@@ -203,7 +137,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**HelperPaginatedLedgerBalance**](HelperPaginatedLedgerBalance.md)
+[**HelperPaginatedLedgerAccount**](HelperPaginatedLedgerAccount.md)
 
 ### Authorization
 
@@ -240,7 +174,7 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | 
+    id := "id_example" // string | Account ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -260,7 +194,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Account ID | 
 
 ### Other Parameters
 
@@ -409,6 +343,72 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## V1CurrencyPost
+
+> LedgerCurrency V1CurrencyPost(ctx).Currency(currency).Execute()
+
+Get a ledger currencies
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
+)
+
+func main() {
+    currency := *openapiclient.NewHttpCurrencyParams("Code_example", "Name_example") // HttpCurrencyParams | Currency JSON
+
+    configuration := openapiclient.NewConfiguration()
+    apiClient := openapiclient.NewAPIClient(configuration)
+    resp, r, err := apiClient.AccountLedgera.V1CurrencyPost(context.Background()).Currency(currency).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `AccountLedgera.V1CurrencyPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `V1CurrencyPost`: LedgerCurrency
+    fmt.Fprintf(os.Stdout, "Response from `AccountLedgera.V1CurrencyPost`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiV1CurrencyPostRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **currency** | [**HttpCurrencyParams**](HttpCurrencyParams.md) | Currency JSON | 
+
+### Return type
+
+[**LedgerCurrency**](LedgerCurrency.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

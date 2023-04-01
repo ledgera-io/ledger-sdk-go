@@ -161,7 +161,7 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | 
+    id := "id_example" // string | Plan ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -181,7 +181,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Plan ID | 
 
 ### Other Parameters
 
@@ -231,7 +231,7 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | 
+    id := "id_example" // string | Plan ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -251,7 +251,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Plan ID | 
 
 ### Other Parameters
 
@@ -301,7 +301,7 @@ import (
 )
 
 func main() {
-    id := "id_example" // string | 
+    id := "id_example" // string | Plan ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -321,7 +321,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**id** | **string** |  | 
+**id** | **string** | Plan ID | 
 
 ### Other Parameters
 

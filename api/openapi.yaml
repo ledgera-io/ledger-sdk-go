@@ -1,9 +1,8 @@
 openapi: 3.0.1
 info:
   contact: {}
-  description: teste
-  title: Ledgera API
-  version: "2"
+  title: ledgera
+  version: v2
 servers:
 - url: /
 paths:
@@ -233,7 +232,8 @@ paths:
     delete:
       description: Delete account plan
       parameters:
-      - explode: false
+      - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
@@ -259,7 +259,8 @@ paths:
     get:
       description: Get account plan
       parameters:
-      - explode: false
+      - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
@@ -279,7 +280,8 @@ paths:
     put:
       description: Update account plan
       parameters:
-      - explode: false
+      - description: Plan ID
+        explode: false
         in: path
         name: id
         required: true
@@ -346,7 +348,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/helper.Paginated-ledger_Balance'
+                $ref: '#/components/schemas/helper.Paginated-ledger_Account'
           description: OK
         "404":
           content:
@@ -361,7 +363,8 @@ paths:
     get:
       description: Get account balances
       parameters:
-      - explode: false
+      - description: Account ID
+        explode: false
         in: path
         name: id
         required: true
@@ -388,7 +391,8 @@ paths:
     get:
       description: Get account journal
       parameters:
-      - explode: false
+      - description: Account ID
+        explode: false
         in: path
         name: id
         required: true
@@ -456,7 +460,7 @@ paths:
     get:
       description: Get billing plan by ID
       parameters:
-      - description: Billing ID JSON
+      - description: Billing plan ID
         explode: false
         in: path
         name: billingPlanId
@@ -551,7 +555,6 @@ paths:
       - account
     post:
       description: Get ledger currencies
-      operationId: teste
       requestBody:
         content:
           application/json:
@@ -811,21 +814,34 @@ components:
             type: string
           type: object
       type: object
-    helper.Paginated-ledger_Balance:
+    helper.Paginated-ledger_Account:
       example:
         metadata:
           key: metadata
         data:
-          accountId: accountId
           createdAt: createdAt
-          amount: 0.8008281904610115
-          seqNum: 6
-          currency: currency
+          balances:
+          - accountId: accountId
+            createdAt: createdAt
+            amount: 0.8008281904610115
+            seqNum: 6
+            currency: currency
+            type: type
+            updatedAt: updatedAt
+          - accountId: accountId
+            createdAt: createdAt
+            amount: 0.8008281904610115
+            seqNum: 6
+            currency: currency
+            type: type
+            updatedAt: updatedAt
+          subType: subType
+          billingPlanId: billingPlanId
+          id: id
           type: type
-          updatedAt: updatedAt
       properties:
         data:
-          $ref: '#/components/schemas/ledger.Balance'
+          $ref: '#/components/schemas/ledger.Account'
         metadata:
           additionalProperties:
             type: string
@@ -931,13 +947,6 @@ components:
           type: array
         message:
           type: string
-      type: object
-    http.QueryAccountPlan:
-      properties:
-        id:
-          type: string
-      required:
-      - id
       type: object
     http.RegisterAccount:
       properties:
@@ -1315,3 +1324,4 @@ components:
       - processType
       - transactionType
       type: object
+x-original-swagger-version: "2.0"

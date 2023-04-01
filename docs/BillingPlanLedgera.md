@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    billingPlanId := "billingPlanId_example" // string | Billing ID JSON
+    billingPlanId := "billingPlanId_example" // string | Billing plan ID
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
@@ -53,7 +53,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**billingPlanId** | **string** | Billing ID JSON | 
+**billingPlanId** | **string** | Billing plan ID | 
 
 ### Other Parameters
 
