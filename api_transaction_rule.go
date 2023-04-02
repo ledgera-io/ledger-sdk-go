@@ -22,32 +22,32 @@ import (
 // TransactionRuleLedgeraService TransactionRuleLedgera service
 type TransactionRuleLedgeraService service
 
-type ApiTransactionRuleBulkPostRequest struct {
+type ApiV1TransactionRuleBulkPostRequest struct {
 	ctx context.Context
 	ApiService *TransactionRuleLedgeraService
 	transaction *[]LedgerTransactionRule
 }
 
 // Transaction rule JSON
-func (r ApiTransactionRuleBulkPostRequest) Transaction(transaction []LedgerTransactionRule) ApiTransactionRuleBulkPostRequest {
+func (r ApiV1TransactionRuleBulkPostRequest) Transaction(transaction []LedgerTransactionRule) ApiV1TransactionRuleBulkPostRequest {
 	r.transaction = &transaction
 	return r
 }
 
-func (r ApiTransactionRuleBulkPostRequest) Execute() ([]LedgerTransactionRule, *http.Response, error) {
-	return r.ApiService.TransactionRuleBulkPostExecute(r)
+func (r ApiV1TransactionRuleBulkPostRequest) Execute() ([]LedgerTransactionRule, *http.Response, error) {
+	return r.ApiService.V1TransactionRuleBulkPostExecute(r)
 }
 
 /*
-TransactionRuleBulkPost Create transaction rule
+V1TransactionRuleBulkPost Create transaction rule
 
 Create transaction rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTransactionRuleBulkPostRequest
+ @return ApiV1TransactionRuleBulkPostRequest
 */
-func (a *TransactionRuleLedgeraService) TransactionRuleBulkPost(ctx context.Context) ApiTransactionRuleBulkPostRequest {
-	return ApiTransactionRuleBulkPostRequest{
+func (a *TransactionRuleLedgeraService) V1TransactionRuleBulkPost(ctx context.Context) ApiV1TransactionRuleBulkPostRequest {
+	return ApiV1TransactionRuleBulkPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -55,7 +55,7 @@ func (a *TransactionRuleLedgeraService) TransactionRuleBulkPost(ctx context.Cont
 
 // Execute executes the request
 //  @return []LedgerTransactionRule
-func (a *TransactionRuleLedgeraService) TransactionRuleBulkPostExecute(r ApiTransactionRuleBulkPostRequest) ([]LedgerTransactionRule, *http.Response, error) {
+func (a *TransactionRuleLedgeraService) V1TransactionRuleBulkPostExecute(r ApiV1TransactionRuleBulkPostRequest) ([]LedgerTransactionRule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -63,12 +63,12 @@ func (a *TransactionRuleLedgeraService) TransactionRuleBulkPostExecute(r ApiTran
 		localVarReturnValue  []LedgerTransactionRule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.TransactionRuleBulkPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.V1TransactionRuleBulkPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction/rule/bulk"
+	localVarPath := localBasePath + "/v1/transaction/rule/bulk"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -133,25 +133,25 @@ func (a *TransactionRuleLedgeraService) TransactionRuleBulkPostExecute(r ApiTran
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTransactionRuleGetRequest struct {
+type ApiV1TransactionRuleGetRequest struct {
 	ctx context.Context
 	ApiService *TransactionRuleLedgeraService
 }
 
-func (r ApiTransactionRuleGetRequest) Execute() ([]LedgerTransactionRule, *http.Response, error) {
-	return r.ApiService.TransactionRuleGetExecute(r)
+func (r ApiV1TransactionRuleGetRequest) Execute() ([]LedgerTransactionRule, *http.Response, error) {
+	return r.ApiService.V1TransactionRuleGetExecute(r)
 }
 
 /*
-TransactionRuleGet List transaction rule
+V1TransactionRuleGet List transaction rule
 
 List transaction rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTransactionRuleGetRequest
+ @return ApiV1TransactionRuleGetRequest
 */
-func (a *TransactionRuleLedgeraService) TransactionRuleGet(ctx context.Context) ApiTransactionRuleGetRequest {
-	return ApiTransactionRuleGetRequest{
+func (a *TransactionRuleLedgeraService) V1TransactionRuleGet(ctx context.Context) ApiV1TransactionRuleGetRequest {
+	return ApiV1TransactionRuleGetRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -159,7 +159,7 @@ func (a *TransactionRuleLedgeraService) TransactionRuleGet(ctx context.Context) 
 
 // Execute executes the request
 //  @return []LedgerTransactionRule
-func (a *TransactionRuleLedgeraService) TransactionRuleGetExecute(r ApiTransactionRuleGetRequest) ([]LedgerTransactionRule, *http.Response, error) {
+func (a *TransactionRuleLedgeraService) V1TransactionRuleGetExecute(r ApiV1TransactionRuleGetRequest) ([]LedgerTransactionRule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -167,12 +167,12 @@ func (a *TransactionRuleLedgeraService) TransactionRuleGetExecute(r ApiTransacti
 		localVarReturnValue  []LedgerTransactionRule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.TransactionRuleGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.V1TransactionRuleGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction/rule"
+	localVarPath := localBasePath + "/v1/transaction/rule"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -232,32 +232,32 @@ func (a *TransactionRuleLedgeraService) TransactionRuleGetExecute(r ApiTransacti
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTransactionRulePostRequest struct {
+type ApiV1TransactionRulePostRequest struct {
 	ctx context.Context
 	ApiService *TransactionRuleLedgeraService
 	transaction *LedgerTransactionRuleParams
 }
 
 // Transaction rule JSON
-func (r ApiTransactionRulePostRequest) Transaction(transaction LedgerTransactionRuleParams) ApiTransactionRulePostRequest {
+func (r ApiV1TransactionRulePostRequest) Transaction(transaction LedgerTransactionRuleParams) ApiV1TransactionRulePostRequest {
 	r.transaction = &transaction
 	return r
 }
 
-func (r ApiTransactionRulePostRequest) Execute() (*LedgerTransactionRule, *http.Response, error) {
-	return r.ApiService.TransactionRulePostExecute(r)
+func (r ApiV1TransactionRulePostRequest) Execute() (*LedgerTransactionRule, *http.Response, error) {
+	return r.ApiService.V1TransactionRulePostExecute(r)
 }
 
 /*
-TransactionRulePost Create transaction rule
+V1TransactionRulePost Create transaction rule
 
 Create transaction rule
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTransactionRulePostRequest
+ @return ApiV1TransactionRulePostRequest
 */
-func (a *TransactionRuleLedgeraService) TransactionRulePost(ctx context.Context) ApiTransactionRulePostRequest {
-	return ApiTransactionRulePostRequest{
+func (a *TransactionRuleLedgeraService) V1TransactionRulePost(ctx context.Context) ApiV1TransactionRulePostRequest {
+	return ApiV1TransactionRulePostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -265,7 +265,7 @@ func (a *TransactionRuleLedgeraService) TransactionRulePost(ctx context.Context)
 
 // Execute executes the request
 //  @return LedgerTransactionRule
-func (a *TransactionRuleLedgeraService) TransactionRulePostExecute(r ApiTransactionRulePostRequest) (*LedgerTransactionRule, *http.Response, error) {
+func (a *TransactionRuleLedgeraService) V1TransactionRulePostExecute(r ApiV1TransactionRulePostRequest) (*LedgerTransactionRule, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -273,12 +273,12 @@ func (a *TransactionRuleLedgeraService) TransactionRulePostExecute(r ApiTransact
 		localVarReturnValue  *LedgerTransactionRule
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.TransactionRulePost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionRuleLedgeraService.V1TransactionRulePost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction/rule"
+	localVarPath := localBasePath + "/v1/transaction/rule"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

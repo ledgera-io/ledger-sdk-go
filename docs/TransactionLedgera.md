@@ -4,15 +4,15 @@ All URIs are relative to *https://api.ledgera*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**TransactionIdGet**](TransactionLedgera.md#TransactionIdGet) | **Get** /transaction/{id} | Get transaction
-[**TransactionPost**](TransactionLedgera.md#TransactionPost) | **Post** /transaction | Create transaction
-[**TransactionRawPost**](TransactionLedgera.md#TransactionRawPost) | **Post** /transaction/raw | Create raw transaction
+[**V1TransactionIdGet**](TransactionLedgera.md#V1TransactionIdGet) | **Get** /v1/transaction/{id} | Get transaction
+[**V1TransactionPost**](TransactionLedgera.md#V1TransactionPost) | **Post** /v1/transaction | Create transaction
+[**V1TransactionRawPost**](TransactionLedgera.md#V1TransactionRawPost) | **Post** /v1/transaction/raw | Create raw transaction
 
 
 
-## TransactionIdGet
+## V1TransactionIdGet
 
-> LedgerTransaction TransactionIdGet(ctx, id).Execute()
+> LedgerTransaction V1TransactionIdGet(ctx, id).Execute()
 
 Get transaction
 
@@ -35,13 +35,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionLedgera.TransactionIdGet(context.Background(), id).Execute()
+    resp, r, err := apiClient.TransactionLedgera.V1TransactionIdGet(context.Background(), id).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.TransactionIdGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.V1TransactionIdGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionIdGet`: LedgerTransaction
-    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.TransactionIdGet`: %v\n", resp)
+    // response from `V1TransactionIdGet`: LedgerTransaction
+    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.V1TransactionIdGet`: %v\n", resp)
 }
 ```
 
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionIdGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionIdGetRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -80,9 +80,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## TransactionPost
+## V1TransactionPost
 
-> LedgerTransactionProcessed TransactionPost(ctx).Transaction(transaction).Execute()
+> LedgerTransactionProcessed V1TransactionPost(ctx).Transaction(transaction).Execute()
 
 Create transaction
 
@@ -105,13 +105,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionLedgera.TransactionPost(context.Background()).Transaction(transaction).Execute()
+    resp, r, err := apiClient.TransactionLedgera.V1TransactionPost(context.Background()).Transaction(transaction).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.TransactionPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.V1TransactionPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionPost`: LedgerTransactionProcessed
-    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.TransactionPost`: %v\n", resp)
+    // response from `V1TransactionPost`: LedgerTransactionProcessed
+    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.V1TransactionPost`: %v\n", resp)
 }
 ```
 
@@ -121,7 +121,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionPostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -146,9 +146,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## TransactionRawPost
+## V1TransactionRawPost
 
-> LedgerTransactionProcessed TransactionRawPost(ctx).Transaction(transaction).Execute()
+> LedgerTransactionProcessed V1TransactionRawPost(ctx).Transaction(transaction).Execute()
 
 Create raw transaction
 
@@ -171,13 +171,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionLedgera.TransactionRawPost(context.Background()).Transaction(transaction).Execute()
+    resp, r, err := apiClient.TransactionLedgera.V1TransactionRawPost(context.Background()).Transaction(transaction).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.TransactionRawPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionLedgera.V1TransactionRawPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionRawPost`: LedgerTransactionProcessed
-    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.TransactionRawPost`: %v\n", resp)
+    // response from `V1TransactionRawPost`: LedgerTransactionProcessed
+    fmt.Fprintf(os.Stdout, "Response from `TransactionLedgera.V1TransactionRawPost`: %v\n", resp)
 }
 ```
 
@@ -187,7 +187,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionRawPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionRawPostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

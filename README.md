@@ -94,12 +94,12 @@ Class | Method | HTTP request | Description
 *BillingPlanLedgera* | [**V1BillingBulkPost**](docs/BillingPlanLedgera.md#v1billingbulkpost) | **Post** /v1/billing/bulk | Create billing plan
 *BillingPlanLedgera* | [**V1BillingGet**](docs/BillingPlanLedgera.md#v1billingget) | **Get** /v1/billing | List billing
 *BillingPlanLedgera* | [**V1BillingPost**](docs/BillingPlanLedgera.md#v1billingpost) | **Post** /v1/billing | Create billing plan
-*TransactionLedgera* | [**TransactionIdGet**](docs/TransactionLedgera.md#transactionidget) | **Get** /transaction/{id} | Get transaction
-*TransactionLedgera* | [**TransactionPost**](docs/TransactionLedgera.md#transactionpost) | **Post** /transaction | Create transaction
-*TransactionLedgera* | [**TransactionRawPost**](docs/TransactionLedgera.md#transactionrawpost) | **Post** /transaction/raw | Create raw transaction
-*TransactionRuleLedgera* | [**TransactionRuleBulkPost**](docs/TransactionRuleLedgera.md#transactionrulebulkpost) | **Post** /transaction/rule/bulk | Create transaction rule
-*TransactionRuleLedgera* | [**TransactionRuleGet**](docs/TransactionRuleLedgera.md#transactionruleget) | **Get** /transaction/rule | List transaction rule
-*TransactionRuleLedgera* | [**TransactionRulePost**](docs/TransactionRuleLedgera.md#transactionrulepost) | **Post** /transaction/rule | Create transaction rule
+*TransactionLedgera* | [**V1TransactionIdGet**](docs/TransactionLedgera.md#v1transactionidget) | **Get** /v1/transaction/{id} | Get transaction
+*TransactionLedgera* | [**V1TransactionPost**](docs/TransactionLedgera.md#v1transactionpost) | **Post** /v1/transaction | Create transaction
+*TransactionLedgera* | [**V1TransactionRawPost**](docs/TransactionLedgera.md#v1transactionrawpost) | **Post** /v1/transaction/raw | Create raw transaction
+*TransactionRuleLedgera* | [**V1TransactionRuleBulkPost**](docs/TransactionRuleLedgera.md#v1transactionrulebulkpost) | **Post** /v1/transaction/rule/bulk | Create transaction rule
+*TransactionRuleLedgera* | [**V1TransactionRuleGet**](docs/TransactionRuleLedgera.md#v1transactionruleget) | **Get** /v1/transaction/rule | List transaction rule
+*TransactionRuleLedgera* | [**V1TransactionRulePost**](docs/TransactionRuleLedgera.md#v1transactionrulepost) | **Post** /v1/transaction/rule | Create transaction rule
 
 
 ## Documentation For Models

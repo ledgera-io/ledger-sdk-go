@@ -8,160 +8,6 @@ info:
 servers:
 - url: https://api.ledgera/
 paths:
-  /transaction:
-    post:
-      description: Create transaction
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ledger.TransactionParams'
-        description: Transaction JSON
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ledger.TransactionProcessed'
-          description: Created
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/http.HttpConflict'
-          description: conflict error
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
-          description: validation error
-      summary: Create transaction
-      tags:
-      - transaction
-      x-codegen-request-body-name: transaction
-  /transaction/{id}:
-    get:
-      description: Get transaction
-      parameters:
-      - description: Transaction ID
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ledger.Transaction'
-          description: OK
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/http.HttpNotFound'
-          description: Transaction not found
-      summary: Get transaction
-      tags:
-      - transaction
-  /transaction/raw:
-    post:
-      description: Create raw transaction
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ledger.TransactionParams'
-        description: Transaction JSON
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ledger.TransactionProcessed'
-          description: Created
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/http.HttpConflict'
-          description: conflict error
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
-          description: validation error
-      summary: Create raw transaction
-      tags:
-      - transaction
-      x-codegen-request-body-name: transaction
-  /transaction/rule:
-    get:
-      description: List transaction rule
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ledger.TransactionRule'
-                type: array
-          description: OK
-      summary: List transaction rule
-      tags:
-      - transaction-rule
-    post:
-      description: Create transaction rule
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ledger.TransactionRuleParams'
-        description: Transaction rule JSON
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ledger.TransactionRule'
-          description: Created
-      summary: Create transaction rule
-      tags:
-      - transaction-rule
-      x-codegen-request-body-name: transaction
-  /transaction/rule/bulk:
-    post:
-      description: Create transaction rule
-      requestBody:
-        content:
-          application/json:
-            schema:
-              items:
-                $ref: '#/components/schemas/ledger.TransactionRule'
-              type: array
-        description: Transaction rule JSON
-        required: true
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/ledger.TransactionRule'
-                type: array
-          description: Created
-      summary: Create transaction rule
-      tags:
-      - transaction-rule
-      x-codegen-request-body-name: transaction
   /v1/account:
     post:
       description: Create account
@@ -235,13 +81,11 @@ paths:
       description: Delete account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -262,13 +106,11 @@ paths:
       description: Get account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -283,13 +125,11 @@ paths:
       description: Update account plan
       parameters:
       - description: Plan ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -310,13 +150,11 @@ paths:
     post:
       description: Bulk create account plan
       parameters:
-      - explode: true
-        in: query
+      - in: query
         name: id
         required: true
         schema:
           type: string
-        style: form
       responses:
         "201":
           content:
@@ -338,13 +176,11 @@ paths:
       description: Get account account
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -366,13 +202,11 @@ paths:
       description: Get account balances
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -394,38 +228,25 @@ paths:
       description: Get account journal
       parameters:
       - description: Account ID
-        explode: false
         in: path
         name: id
         required: true
         schema:
           type: string
-        style: simple
-      - explode: true
-        in: query
+      - in: query
         name: cursor
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: date_from
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: date_to
-        required: false
         schema:
           type: string
-        style: form
-      - explode: true
-        in: query
+      - in: query
         name: type
-        required: false
         schema:
           enum:
           - DEBIT
@@ -434,17 +255,13 @@ paths:
           x-enum-varnames:
           - JournalQueryTypeDebit
           - JournalQueryTypeCredit
-        style: form
         x-enum-varnames:
         - JournalQueryTypeDebit
         - JournalQueryTypeCredit
-      - explode: true
-        in: query
+      - in: query
         name: limit
-        required: false
         schema:
           type: integer
-        style: form
       responses:
         "200":
           content:
@@ -507,13 +324,11 @@ paths:
       description: Get billing plan by ID
       parameters:
       - description: Billing plan ID
-        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -534,13 +349,11 @@ paths:
       description: Update billing plan
       parameters:
       - description: Billing plan ID
-        explode: false
         in: path
         name: billingPlanId
         required: true
         schema:
           type: string
-        style: simple
       responses:
         "200":
           content:
@@ -619,6 +432,158 @@ paths:
       tags:
       - account
       x-codegen-request-body-name: currency
+  /v1/transaction:
+    post:
+      description: Create transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger.TransactionParams'
+        description: Transaction JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.TransactionProcessed'
+          description: Created
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpConflict'
+          description: conflict error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create transaction
+      tags:
+      - transaction
+      x-codegen-request-body-name: transaction
+  /v1/transaction/{id}:
+    get:
+      description: Get transaction
+      parameters:
+      - description: Transaction ID
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.Transaction'
+          description: OK
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpNotFound'
+          description: Transaction not found
+      summary: Get transaction
+      tags:
+      - transaction
+  /v1/transaction/raw:
+    post:
+      description: Create raw transaction
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger.TransactionParams'
+        description: Transaction JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.TransactionProcessed'
+          description: Created
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpConflict'
+          description: conflict error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/http.HttpUnprocessableEntity'
+          description: validation error
+      summary: Create raw transaction
+      tags:
+      - transaction
+      x-codegen-request-body-name: transaction
+  /v1/transaction/rule:
+    get:
+      description: List transaction rule
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ledger.TransactionRule'
+                type: array
+          description: OK
+      summary: List transaction rule
+      tags:
+      - transaction-rule
+    post:
+      description: Create transaction rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ledger.TransactionRuleParams'
+        description: Transaction rule JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ledger.TransactionRule'
+          description: Created
+      summary: Create transaction rule
+      tags:
+      - transaction-rule
+      x-codegen-request-body-name: transaction
+  /v1/transaction/rule/bulk:
+    post:
+      description: Create transaction rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              items:
+                $ref: '#/components/schemas/ledger.TransactionRule'
+              type: array
+        description: Transaction rule JSON
+        required: true
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/ledger.TransactionRule'
+                type: array
+          description: Created
+      summary: Create transaction rule
+      tags:
+      - transaction-rule
+      x-codegen-request-body-name: transaction
 components:
   schemas:
     account_plan.AccountPlan:
@@ -701,11 +666,11 @@ components:
           transactions:
           - transactionType: transactionType
             entryType: entryType
-            amount: 0.8008281904610115
+            amount: amount
             type: null
           - transactionType: transactionType
             entryType: entryType
-            amount: 0.8008281904610115
+            amount: amount
             type: null
         name: name
         description: description
@@ -738,11 +703,11 @@ components:
         transactions:
         - transactionType: transactionType
           entryType: entryType
-          amount: 0.8008281904610115
+          amount: amount
           type: null
         - transactionType: transactionType
           entryType: entryType
-          amount: 0.8008281904610115
+          amount: amount
           type: null
       properties:
         transactions:
@@ -762,7 +727,7 @@ components:
       example:
         transactionType: transactionType
         entryType: entryType
-        amount: "0.8008281904610115"
+        amount: amount
         type: null
       properties:
         amount:
@@ -846,15 +811,15 @@ components:
         data:
         - accountId: accountId
           createdAt: createdAt
-          amount: 0.8008281904610115
-          seqNum: 6
+          amount: amount
+          seqNum: 0
           currency: currency
           type: type
           updatedAt: updatedAt
         - accountId: accountId
           createdAt: createdAt
-          amount: 0.8008281904610115
-          seqNum: 6
+          amount: amount
+          seqNum: 0
           currency: currency
           type: type
           updatedAt: updatedAt
@@ -894,12 +859,12 @@ components:
         metadata:
           key: metadata
         data:
-        - amount: 0.8008281904610115
+        - amount: amount
           metadata: "{}"
           entryLabel: entryLabel
-          entryOrder: 1
+          entryOrder: 0
           accountSubType: accountSubType
-          seqNum: 5
+          seqNum: 6
           accountType: accountType
           transactionId: transactionId
           entryId: entryId
@@ -909,16 +874,16 @@ components:
           balanceType: balanceType
           conciliationId: conciliationId
           settledAt: settledAt
-          balanceAfter: 6.027456183070403
+          balanceAfter: balanceAfter
           currency: currency
           id: id
           processType: processType
-        - amount: 0.8008281904610115
+        - amount: amount
           metadata: "{}"
           entryLabel: entryLabel
-          entryOrder: 1
+          entryOrder: 0
           accountSubType: accountSubType
-          seqNum: 5
+          seqNum: 6
           accountType: accountType
           transactionId: transactionId
           entryId: entryId
@@ -928,7 +893,7 @@ components:
           balanceType: balanceType
           conciliationId: conciliationId
           settledAt: settledAt
-          balanceAfter: 6.027456183070403
+          balanceAfter: balanceAfter
           currency: currency
           id: id
           processType: processType
@@ -951,15 +916,15 @@ components:
           balances:
           - accountId: accountId
             createdAt: createdAt
-            amount: 0.8008281904610115
-            seqNum: 6
+            amount: amount
+            seqNum: 0
             currency: currency
             type: type
             updatedAt: updatedAt
           - accountId: accountId
             createdAt: createdAt
-            amount: 0.8008281904610115
-            seqNum: 6
+            amount: amount
+            seqNum: 0
             currency: currency
             type: type
             updatedAt: updatedAt
@@ -1066,15 +1031,15 @@ components:
         balances:
         - accountId: accountId
           createdAt: createdAt
-          amount: 0.8008281904610115
-          seqNum: 6
+          amount: amount
+          seqNum: 0
           currency: currency
           type: type
           updatedAt: updatedAt
         - accountId: accountId
           createdAt: createdAt
-          amount: 0.8008281904610115
-          seqNum: 6
+          amount: amount
+          seqNum: 0
           currency: currency
           type: type
           updatedAt: updatedAt
@@ -1102,8 +1067,8 @@ components:
       example:
         accountId: accountId
         createdAt: createdAt
-        amount: "0.8008281904610115"
-        seqNum: 6
+        amount: amount
+        seqNum: 0
         currency: currency
         type: type
         updatedAt: updatedAt
@@ -1144,12 +1109,12 @@ components:
       type: object
     ledger.JournalEntry:
       example:
-        amount: "0.8008281904610115"
+        amount: amount
         metadata: "{}"
         entryLabel: entryLabel
-        entryOrder: 1
+        entryOrder: 0
         accountSubType: accountSubType
-        seqNum: 5
+        seqNum: 6
         accountType: accountType
         transactionId: transactionId
         entryId: entryId
@@ -1159,7 +1124,7 @@ components:
         balanceType: balanceType
         conciliationId: conciliationId
         settledAt: settledAt
-        balanceAfter: "6.027456183070403"
+        balanceAfter: balanceAfter
         currency: currency
         id: id
         processType: processType
@@ -1279,12 +1244,12 @@ components:
       example:
         createdAt: createdAt
         entries:
-        - amount: 0.8008281904610115
+        - amount: amount
           metadata: "{}"
           entryLabel: entryLabel
-          entryOrder: 1
+          entryOrder: 0
           accountSubType: accountSubType
-          seqNum: 5
+          seqNum: 6
           accountType: accountType
           transactionId: transactionId
           entryId: entryId
@@ -1294,16 +1259,16 @@ components:
           balanceType: balanceType
           conciliationId: conciliationId
           settledAt: settledAt
-          balanceAfter: 6.027456183070403
+          balanceAfter: balanceAfter
           currency: currency
           id: id
           processType: processType
-        - amount: 0.8008281904610115
+        - amount: amount
           metadata: "{}"
           entryLabel: entryLabel
-          entryOrder: 1
+          entryOrder: 0
           accountSubType: accountSubType
-          seqNum: 5
+          seqNum: 6
           accountType: accountType
           transactionId: transactionId
           entryId: entryId
@@ -1313,7 +1278,7 @@ components:
           balanceType: balanceType
           conciliationId: conciliationId
           settledAt: settledAt
-          balanceAfter: 6.027456183070403
+          balanceAfter: balanceAfter
           currency: currency
           id: id
           processType: processType

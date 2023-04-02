@@ -4,15 +4,15 @@ All URIs are relative to *https://api.ledgera*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**TransactionRuleBulkPost**](TransactionRuleLedgera.md#TransactionRuleBulkPost) | **Post** /transaction/rule/bulk | Create transaction rule
-[**TransactionRuleGet**](TransactionRuleLedgera.md#TransactionRuleGet) | **Get** /transaction/rule | List transaction rule
-[**TransactionRulePost**](TransactionRuleLedgera.md#TransactionRulePost) | **Post** /transaction/rule | Create transaction rule
+[**V1TransactionRuleBulkPost**](TransactionRuleLedgera.md#V1TransactionRuleBulkPost) | **Post** /v1/transaction/rule/bulk | Create transaction rule
+[**V1TransactionRuleGet**](TransactionRuleLedgera.md#V1TransactionRuleGet) | **Get** /v1/transaction/rule | List transaction rule
+[**V1TransactionRulePost**](TransactionRuleLedgera.md#V1TransactionRulePost) | **Post** /v1/transaction/rule | Create transaction rule
 
 
 
-## TransactionRuleBulkPost
+## V1TransactionRuleBulkPost
 
-> []LedgerTransactionRule TransactionRuleBulkPost(ctx).Transaction(transaction).Execute()
+> []LedgerTransactionRule V1TransactionRuleBulkPost(ctx).Transaction(transaction).Execute()
 
 Create transaction rule
 
@@ -35,13 +35,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionRuleLedgera.TransactionRuleBulkPost(context.Background()).Transaction(transaction).Execute()
+    resp, r, err := apiClient.TransactionRuleLedgera.V1TransactionRuleBulkPost(context.Background()).Transaction(transaction).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.TransactionRuleBulkPost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.V1TransactionRuleBulkPost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionRuleBulkPost`: []LedgerTransactionRule
-    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.TransactionRuleBulkPost`: %v\n", resp)
+    // response from `V1TransactionRuleBulkPost`: []LedgerTransactionRule
+    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.V1TransactionRuleBulkPost`: %v\n", resp)
 }
 ```
 
@@ -51,7 +51,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionRuleBulkPostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionRuleBulkPostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -76,9 +76,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## TransactionRuleGet
+## V1TransactionRuleGet
 
-> []LedgerTransactionRule TransactionRuleGet(ctx).Execute()
+> []LedgerTransactionRule V1TransactionRuleGet(ctx).Execute()
 
 List transaction rule
 
@@ -100,13 +100,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionRuleLedgera.TransactionRuleGet(context.Background()).Execute()
+    resp, r, err := apiClient.TransactionRuleLedgera.V1TransactionRuleGet(context.Background()).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.TransactionRuleGet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.V1TransactionRuleGet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionRuleGet`: []LedgerTransactionRule
-    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.TransactionRuleGet`: %v\n", resp)
+    // response from `V1TransactionRuleGet`: []LedgerTransactionRule
+    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.V1TransactionRuleGet`: %v\n", resp)
 }
 ```
 
@@ -116,7 +116,7 @@ This endpoint does not need any parameter.
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionRuleGetRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionRuleGetRequest struct via the builder pattern
 
 
 ### Return type
@@ -137,9 +137,9 @@ No authorization required
 [[Back to README]](../README.md)
 
 
-## TransactionRulePost
+## V1TransactionRulePost
 
-> LedgerTransactionRule TransactionRulePost(ctx).Transaction(transaction).Execute()
+> LedgerTransactionRule V1TransactionRulePost(ctx).Transaction(transaction).Execute()
 
 Create transaction rule
 
@@ -162,13 +162,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     apiClient := openapiclient.NewAPIClient(configuration)
-    resp, r, err := apiClient.TransactionRuleLedgera.TransactionRulePost(context.Background()).Transaction(transaction).Execute()
+    resp, r, err := apiClient.TransactionRuleLedgera.V1TransactionRulePost(context.Background()).Transaction(transaction).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.TransactionRulePost``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionRuleLedgera.V1TransactionRulePost``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `TransactionRulePost`: LedgerTransactionRule
-    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.TransactionRulePost`: %v\n", resp)
+    // response from `V1TransactionRulePost`: LedgerTransactionRule
+    fmt.Fprintf(os.Stdout, "Response from `TransactionRuleLedgera.V1TransactionRulePost`: %v\n", resp)
 }
 ```
 
@@ -178,7 +178,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiTransactionRulePostRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiV1TransactionRulePostRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

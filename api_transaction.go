@@ -23,27 +23,27 @@ import (
 // TransactionLedgeraService TransactionLedgera service
 type TransactionLedgeraService service
 
-type ApiTransactionIdGetRequest struct {
+type ApiV1TransactionIdGetRequest struct {
 	ctx context.Context
 	ApiService *TransactionLedgeraService
 	id string
 }
 
-func (r ApiTransactionIdGetRequest) Execute() (*LedgerTransaction, *http.Response, error) {
-	return r.ApiService.TransactionIdGetExecute(r)
+func (r ApiV1TransactionIdGetRequest) Execute() (*LedgerTransaction, *http.Response, error) {
+	return r.ApiService.V1TransactionIdGetExecute(r)
 }
 
 /*
-TransactionIdGet Get transaction
+V1TransactionIdGet Get transaction
 
 Get transaction
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @param id Transaction ID
- @return ApiTransactionIdGetRequest
+ @return ApiV1TransactionIdGetRequest
 */
-func (a *TransactionLedgeraService) TransactionIdGet(ctx context.Context, id string) ApiTransactionIdGetRequest {
-	return ApiTransactionIdGetRequest{
+func (a *TransactionLedgeraService) V1TransactionIdGet(ctx context.Context, id string) ApiV1TransactionIdGetRequest {
+	return ApiV1TransactionIdGetRequest{
 		ApiService: a,
 		ctx: ctx,
 		id: id,
@@ -52,7 +52,7 @@ func (a *TransactionLedgeraService) TransactionIdGet(ctx context.Context, id str
 
 // Execute executes the request
 //  @return LedgerTransaction
-func (a *TransactionLedgeraService) TransactionIdGetExecute(r ApiTransactionIdGetRequest) (*LedgerTransaction, *http.Response, error) {
+func (a *TransactionLedgeraService) V1TransactionIdGetExecute(r ApiV1TransactionIdGetRequest) (*LedgerTransaction, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
@@ -60,12 +60,12 @@ func (a *TransactionLedgeraService) TransactionIdGetExecute(r ApiTransactionIdGe
 		localVarReturnValue  *LedgerTransaction
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.TransactionIdGet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.V1TransactionIdGet")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction/{id}"
+	localVarPath := localBasePath + "/v1/transaction/{id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -136,32 +136,32 @@ func (a *TransactionLedgeraService) TransactionIdGetExecute(r ApiTransactionIdGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTransactionPostRequest struct {
+type ApiV1TransactionPostRequest struct {
 	ctx context.Context
 	ApiService *TransactionLedgeraService
 	transaction *LedgerTransactionParams
 }
 
 // Transaction JSON
-func (r ApiTransactionPostRequest) Transaction(transaction LedgerTransactionParams) ApiTransactionPostRequest {
+func (r ApiV1TransactionPostRequest) Transaction(transaction LedgerTransactionParams) ApiV1TransactionPostRequest {
 	r.transaction = &transaction
 	return r
 }
 
-func (r ApiTransactionPostRequest) Execute() (*LedgerTransactionProcessed, *http.Response, error) {
-	return r.ApiService.TransactionPostExecute(r)
+func (r ApiV1TransactionPostRequest) Execute() (*LedgerTransactionProcessed, *http.Response, error) {
+	return r.ApiService.V1TransactionPostExecute(r)
 }
 
 /*
-TransactionPost Create transaction
+V1TransactionPost Create transaction
 
 Create transaction
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTransactionPostRequest
+ @return ApiV1TransactionPostRequest
 */
-func (a *TransactionLedgeraService) TransactionPost(ctx context.Context) ApiTransactionPostRequest {
-	return ApiTransactionPostRequest{
+func (a *TransactionLedgeraService) V1TransactionPost(ctx context.Context) ApiV1TransactionPostRequest {
+	return ApiV1TransactionPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -169,7 +169,7 @@ func (a *TransactionLedgeraService) TransactionPost(ctx context.Context) ApiTran
 
 // Execute executes the request
 //  @return LedgerTransactionProcessed
-func (a *TransactionLedgeraService) TransactionPostExecute(r ApiTransactionPostRequest) (*LedgerTransactionProcessed, *http.Response, error) {
+func (a *TransactionLedgeraService) V1TransactionPostExecute(r ApiV1TransactionPostRequest) (*LedgerTransactionProcessed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -177,12 +177,12 @@ func (a *TransactionLedgeraService) TransactionPostExecute(r ApiTransactionPostR
 		localVarReturnValue  *LedgerTransactionProcessed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.TransactionPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.V1TransactionPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction"
+	localVarPath := localBasePath + "/v1/transaction"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -268,32 +268,32 @@ func (a *TransactionLedgeraService) TransactionPostExecute(r ApiTransactionPostR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTransactionRawPostRequest struct {
+type ApiV1TransactionRawPostRequest struct {
 	ctx context.Context
 	ApiService *TransactionLedgeraService
 	transaction *LedgerTransactionParams
 }
 
 // Transaction JSON
-func (r ApiTransactionRawPostRequest) Transaction(transaction LedgerTransactionParams) ApiTransactionRawPostRequest {
+func (r ApiV1TransactionRawPostRequest) Transaction(transaction LedgerTransactionParams) ApiV1TransactionRawPostRequest {
 	r.transaction = &transaction
 	return r
 }
 
-func (r ApiTransactionRawPostRequest) Execute() (*LedgerTransactionProcessed, *http.Response, error) {
-	return r.ApiService.TransactionRawPostExecute(r)
+func (r ApiV1TransactionRawPostRequest) Execute() (*LedgerTransactionProcessed, *http.Response, error) {
+	return r.ApiService.V1TransactionRawPostExecute(r)
 }
 
 /*
-TransactionRawPost Create raw transaction
+V1TransactionRawPost Create raw transaction
 
 Create raw transaction
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiTransactionRawPostRequest
+ @return ApiV1TransactionRawPostRequest
 */
-func (a *TransactionLedgeraService) TransactionRawPost(ctx context.Context) ApiTransactionRawPostRequest {
-	return ApiTransactionRawPostRequest{
+func (a *TransactionLedgeraService) V1TransactionRawPost(ctx context.Context) ApiV1TransactionRawPostRequest {
+	return ApiV1TransactionRawPostRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -301,7 +301,7 @@ func (a *TransactionLedgeraService) TransactionRawPost(ctx context.Context) ApiT
 
 // Execute executes the request
 //  @return LedgerTransactionProcessed
-func (a *TransactionLedgeraService) TransactionRawPostExecute(r ApiTransactionRawPostRequest) (*LedgerTransactionProcessed, *http.Response, error) {
+func (a *TransactionLedgeraService) V1TransactionRawPostExecute(r ApiV1TransactionRawPostRequest) (*LedgerTransactionProcessed, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
@@ -309,12 +309,12 @@ func (a *TransactionLedgeraService) TransactionRawPostExecute(r ApiTransactionRa
 		localVarReturnValue  *LedgerTransactionProcessed
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.TransactionRawPost")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionLedgeraService.V1TransactionRawPost")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/transaction/raw"
+	localVarPath := localBasePath + "/v1/transaction/raw"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
