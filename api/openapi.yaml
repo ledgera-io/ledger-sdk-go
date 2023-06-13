@@ -9,6 +9,30 @@ servers:
 - url: https://api.ledgera/
 paths:
   /v1/account:
+    get:
+      description: "List account"
+      summary: List account
+      tags:
+      - account
+      parameters:
+        - name: "accountIds"
+          in: "query"
+          description: "Account IDs"
+          required: false
+          schema:
+            type: "array"
+            items:
+              type: "string"
+      responses:
+        200:
+          description: "OK"
+          content:
+            application/json: 
+              schema: 
+                type: array
+                items:
+                  $ref: "#/components/schemas/ledger.Account"
+                
     post:
       description: Create account
       requestBody:
@@ -1024,6 +1048,27 @@ components:
       - currencies
       - subType
       - type
+      type: object
+    ledger.AccountWithBillingPlan:
+      properties:
+        balances:
+          items:
+            $ref: '#/components/schemas/ledger.Balance'
+          type: array
+        billingPlanId:
+          type: string
+        billingPlans:
+          type: array
+          items:
+            $ref: '#/components/schemas/billing.BillingPlan'
+        createdAt:
+          type: string
+        id:
+          type: string
+        subType:
+          type: string
+        type:
+          type: string
       type: object
     ledger.Account:
       example:
