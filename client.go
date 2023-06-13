@@ -49,7 +49,7 @@ type APIClient struct {
 
 	// API Services
 
-	AccountLedgera *AccountLedgeraService
+	AccountLedgera *AccountApiService
 
 	AccountPlanLedgera *AccountPlanLedgeraService
 
