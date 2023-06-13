@@ -31,7 +31,7 @@ paths:
               schema: 
                 type: array
                 items:
-                  $ref: "#/components/schemas/ledger.Account"
+                  $ref: "#/components/schemas/ledger.AccountWithBillingPlan"
                 
     post:
       description: Create account

@@ -76,7 +76,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
-	c.AccountLedgera = (*AccountLedgeraService)(&c.common)
+	c.AccountLedgera = (*AccountApiService)(&c.common)
 	c.AccountPlanLedgera = (*AccountPlanLedgeraService)(&c.common)
 	c.BillingPlanLedgera = (*BillingPlanLedgeraService)(&c.common)
 	c.TransactionLedgera = (*TransactionLedgeraService)(&c.common)

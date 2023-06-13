@@ -36,7 +36,7 @@ func (r ApiV1AccountGetRequest) AccountIds(accountIds []string) ApiV1AccountGetR
 	return r
 }
 
-func (r ApiV1AccountGetRequest) Execute() ([]LedgerAccount, *http.Response, error) {
+func (r ApiV1AccountGetRequest) Execute() ([]LedgerAccountWithBillingPlan, *http.Response, error) {
 	return r.ApiService.V1AccountGetExecute(r)
 }
 
@@ -56,13 +56,13 @@ func (a *AccountApiService) V1AccountGet(ctx context.Context) ApiV1AccountGetReq
 }
 
 // Execute executes the request
-//  @return []LedgerAccount
-func (a *AccountApiService) V1AccountGetExecute(r ApiV1AccountGetRequest) ([]LedgerAccount, *http.Response, error) {
+//  @return []LedgerAccountWithBillingPlan
+func (a *AccountApiService) V1AccountGetExecute(r ApiV1AccountGetRequest) ([]LedgerAccountWithBillingPlan, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []LedgerAccount
+		localVarReturnValue  []LedgerAccountWithBillingPlan
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AccountApiService.V1AccountGet")
