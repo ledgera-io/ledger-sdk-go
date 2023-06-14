@@ -26,8 +26,8 @@ const (
 
 // All allowed values of BillingBillingTransactionAmountType enum
 var AllowedBillingBillingTransactionAmountTypeEnumValues = []BillingBillingTransactionAmountType{
-	"VALUE",
-	"PERCENTAGE",
+	"value",
+	"percentage",
 }
 
 func (v *BillingBillingTransactionAmountType) UnmarshalJSON(src []byte) error {
