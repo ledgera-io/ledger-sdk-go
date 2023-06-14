@@ -20,8 +20,8 @@ type BillingBillingTransactionAmountType string
 
 // List of billing.BillingTransactionAmountType
 const (
-	AmountTypeValue BillingBillingTransactionAmountType = "VALUE"
-	AmountTypePercentage BillingBillingTransactionAmountType = "PERCENTAGE"
+	AmountTypeValue BillingBillingTransactionAmountType = "value"
+	AmountTypePercentage BillingBillingTransactionAmountType = "percentage"
 )
 
 // All allowed values of BillingBillingTransactionAmountType enum
